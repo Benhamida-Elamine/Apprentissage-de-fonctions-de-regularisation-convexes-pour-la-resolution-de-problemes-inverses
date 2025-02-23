@@ -1,0 +1,1469 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Configuration et préambule du document
+
+\documentclass[a4paper, 12pt]{report} % Classe de document pour rapport
+
+% ----------------------------------------------------------------------
+% Importation des packages nécessaires
+
+%\usepackage{xurl}      % Gestion des longues URLs
+
+\usepackage{microtype} % Meilleure justification du texte
+
+% Gestion des commentaires
+\usepackage{todonotes}
+
+% Gestion des sections et des titres
+\usepackage{titlesec} 
+
+% Police standard sous LaTeX (Latin Modern)
+%\usepackage{lmodern} 
+
+% Bibliographie (si besoin, décommentez la ligne ci-dessous)
+% \addbibresource{Mabiblio.bib} 
+
+% Gestion des citations
+\usepackage{cite} 
+
+% Langue française et encodage
+\usepackage[french]{babel}      % Pour les règles typographiques françaises
+\usepackage[utf8]{inputenc}     % Pour l'encodage UTF-8
+\usepackage[T1]{fontenc}        % Pour les caractères accentués
+\usepackage{newtxtext} % Optionnel : charge une police alternative compatible
+
+% Gestion des URL et césures correctes
+\usepackage[hyphens]{url} 
+
+% Mathématiques (symboles et formats avancés)
+\usepackage{amsmath, amsfonts, amssymb}
+
+% Mise en page et marges
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+
+\setlength{\marginparwidth}{2.5cm}
+
+% Gestion des graphiques, positionnement et ajustement
+\usepackage{graphicx, float, adjustbox, caption}
+
+% Pour des symboles mathématiques et physiques avancés
+\usepackage{isomath} 
+
+% Espacement entre les lignes
+\usepackage{setspace}
+\setstretch{1.2} % Espacement 1.2 pour un meilleur confort de lecture
+
+% Couleurs avancées
+\usepackage{xcolor}
+\newcommand{\modif}[1]{\textcolor{blue}{#1}}
+\newcommand{\cmt}[1]{\textcolor{red}{#1}}
+
+% Listes personnalisées
+\usepackage{enumitem, pifont}
+
+% Boîtes colorées (par exemple pour mettre en valeur des parties du texte)
+\usepackage{tcolorbox}
+
+% Hyperliens et interaction dans le PDF
+\usepackage[
+    pdfauthor={Groupe IOD}, 
+    pdftitle={Convex regularization learning}, 
+    pdfstartview=Fit, 
+    pdfpagelayout=SinglePage, 
+    pdfnewwindow=true, 
+    bookmarksnumbered=true, 
+    breaklinks=true, 
+    colorlinks=true, 
+    linkcolor=blue, 
+    urlcolor=black, 
+    citecolor=cyan, 
+    linktoc=all
+]{hyperref}
+
+% ----------------------------------------------------------------------
+% Personnalisation des listes
+\usepackage{enumitem}
+
+% Réglage global pour les listes
+\setlist[itemize]{itemsep=0pt, topsep=0pt} % Réduit les espacements
+\setlist[enumerate]{itemsep=0pt, topsep=0pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Définition des titres et commandes personnalisées
+
+% ----------------------------------------------------------------------
+% Définition des commandes personnalisées
+
+% Texte en gras et italique
+\newcommand{\grasital}[1]{\textbf{\textit{#1}}}
+
+% Abréviation du "Service Après-Vente"
+\newcommand{\SAV}{\textbf{Service Après-Vente}}
+
+% Vecteur colonne 3x1
+\newcommand{\vcol}[3]{\begin{pmatrix} #1 \\ #2 \\ #3 \end{pmatrix}}
+
+% Ligne horizontale personnalisée (épaisseur ajustable)
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+% ----------------------------------------------------------------------
+% Gestion des espacements pour les titres (exemple commenté)
+
+% Personnalisation de l'espacement des sections
+% \titlespacing*{\section}{0pt}{-100pt}{1cm} 
+% Explications :
+% - Premier paramètre : indentation du titre (ici 0pt)
+% - Deuxième paramètre : espacement avant le titre (ici -100pt)
+% - Troisième paramètre : espacement après le titre (ici 1cm)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Personnalisation des titres avec titlesec
+
+% Activer la numérotation des sous-sous-sections
+\setcounter{secnumdepth}{3}
+
+% ----------------------------------------------------------------------
+% Personnalisation des chapitres
+\titleformat{\chapter}[block] % Utilisation du style "block" pour alignement propre
+{\normalfont\huge\bfseries} % Style : taille et gras
+{Chapitre~\thechapter :} % Numérotation avec texte personnalisé
+{0.5em} % Espacement entre numéro et titre
+{} % Alignement à gauche pour le titre complet
+
+% Personnalisation des sections
+\titleformat{\section}[block]
+{\normalfont\Large\bfseries} % Taille "Large", gras
+{\thesection.} % Numérotation (exemple : 1.1)
+{0.5em} % Espacement entre numéro et titre
+{}
+
+% Personnalisation des sous-sections
+\titleformat{\subsection}[block]
+{\normalfont\large\bfseries} % Taille "large", gras
+{\thesubsection.} % Numérotation (exemple : 1.1.1)
+{0.5em}
+{}
+
+% Personnalisation des sous-sous-sections
+\titleformat{\subsubsection}[block]
+{\normalfont\normalsize\bfseries}       % Formatage : taille "\normalsize" et texte en gras
+{\thesubsubsection.}               % Affiche la numérotation (exemple : 1.1.1)
+{0.5em}           % Espacement entre la numérotation et le titre
+{}                                 % Pas de texte supplémentaire avant le titre
+
+
+% Espacement pour les chapitres
+\titlespacing*{\chapter}{0pt}{0pt}{20pt} % {indentation}{espace avant}{espace après}
+
+% Espacement pour les sections
+\titlespacing*{\section}{0pt}{15pt}{10pt} % {indentation}{espace avant}{espace après}
+
+% Espacement pour les sous-sections
+\titlespacing*{\subsection}{0pt}{10pt}{6pt}
+
+% Espacement pour les sous-sous-sections
+\titlespacing*{\subsubsection}{0pt}{8pt}{2pt}
+
+
+% Espacement paragraphe
+% Définition de commande pour l'espacement des paragraphes
+\newcommand{\configEspacementParagraphe}[2]{
+    \setlength{\parindent}{#1} % Indentation des paragraphes
+    \setlength{\parskip}{#2}   % Espacement vertical entre les paragraphes
+}
+
+% Application de la configuration
+\configEspacementParagraphe{20pt}{10pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{definition}{Def.}[section]
+\newtheorem{theorem}{Théorème}[section]
+\newtheorem{lemma}{Lemme}[section]
+\newtheorem{corollary}{Corollaire}[section]
+\newtheorem{remark}{Remarque}[section]
+\newtheorem{example}{Exemple}[section]
+
+\newtheorem{proposition}{Proposition}[section]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début du document
+
+\begin{document} 
+
+% Configuration mathématique pour afficher tous les mathématiques en mode "display"
+\everymath{\displaystyle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% La page de garde
+
+\begin{titlepage}
+\begin{center} % Centrer le contenu de la page
+
+% ----------------------------------------------------------------------
+% En-tête de l'université
+\textsc{\huge Université de Bordeaux} \\[0.5cm]
+
+% Intitulé du cursus (personnalisé si nécessaire)
+\textsc{\Large Collège des Sciences et Technologies} \\[0.5cm]
+
+% Logo de l'université
+\includegraphics[scale=0.8]{UB.png} \\[0.5cm]
+
+% ----------------------------------------------------------------------
+% Titre du projet
+\textbf{\LARGE Image, Optimisation et Sciences des Données} \\[1 cm]
+
+\textbf{\Huge Apprentissage d'une fonction de régularisation convexe
+pour la résolution de problèmes inverses} \\[1cm]
+
+% ----------------------------------------------------------------------
+% Liste des auteurs
+\Large\textbf{Auteurs :} \\[0.5cm]
+Faris \textsc{AINA} \\[0.3cm]
+Mohamed El-Amine \textsc{BENHAMIDA} \\[0.3cm]
+Radia \textsc{MADDI} \\[0.3cm]
+Mamour \textsc{N'DIAYE} \\[2cm]
+
+% ----------------------------------------------------------------------
+% Encadrant
+\Large\textbf{Encadrant :} \\[0.5cm]
+Antoine \textsc{GUENNEC} \\[0.5cm]
+
+\end{center}
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Table des matières
+
+% Définition de la profondeur des sections affichées
+% tocdepth = 3 : inclut les chapitres, sections, sous-sections, et sous-sous-sections
+\setcounter{tocdepth}{1} 
+
+% Génération automatique de la table des matières
+\tableofcontents 
+
+% Insérer une nouvelle page après la table des matières
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{Objectifs }
+L'objectif principal du présent projet est de développer une fonction de régularisation \( R(x) \) paramétrée par un réseau de neurones, en se basant sur les travaux de Goujon et al. Cette approche vise à exploiter les propriétés de convexité ou de faible convexité de la fonction de régularisation afin d'améliorer la résolution des problèmes inverses par rapport aux méthodes classiques.
+
+Et plus spéficiquement il s'agira de :
+\begin{itemize}
+    \item [$\blacktriangleright$] Comprendre les principes des méthodes 'Plug-and-Play' appliquées à la résolution des problèmes inverses.
+    \item [$\blacktriangleright$] Étudier le fonctionnement des fonctions de régularisation basées sur des réseaux de neurones.
+    \item [$\blacktriangleright$] Implémenter le code source et comparer ces approches aux méthodes classiques sur différents problèmes inverses.
+\end{itemize} 
+
+\newpage
+
+
+\chapter{Approches variationnelle et plug and play pour la résolution de problèmes inverses}
+
+
+\section{Introduction aux  problèmes inverses en imagerie}
+ 
+La résolution des problèmes inverses consiste à retrouver l'information originale d'un objet d'étude à partir d'observations dégradées. Grâce à sa flexibilité, cette approche permet de traiter des données variées (images 2D, 3D, hyperspectrales) en utilisant des techniques spécifiques, telles que la reconstruction d'image ou l'analyse spectrale.
+
+La première étape pour résoudre un problème inverse consiste à établir le modèle direct, qui s'exprime sous la forme la plus simple :
+\[
+z = A \bar{u} + \epsilon \quad (1)
+\]
+où \( \bar{u} \) représente l'objet original (inconnu), généralement une image composée de \( N \) pixels. \( A \) désigne une transformation linéaire ou non linéaire, modélisant le dispositif d'acquisition. \( \epsilon \) correspond à une perturbation stochastique, autrement dit un bruit de mesure, supposé ici additif. Enfin, \( z \) représente les observations, typiquement une image composée de \( M \) pixels.
+
+
+\subsection{Définition d'un problème inverse}
+
+Le problème inverse consiste alors à estimer une image $\hat{u}$ proche de $\overline{u}$ à partir des informations contenues dans $z$, d'une connaissance complète ou partielle de $A$, des statistiques du bruit, et d'a priori sur la classe d'images à reconstruire. Cette unique équation décrit de nombreux problèmes inverses en traitements d'images, tels que le débruitage ($A$ est l'opérateur identité et $z$ est une version bruitée de l'image originale) ou la déconvolution ($A$ est un opérateur de convolution et $z$ une version floue et bruitée de l'image originale), couramment rencontrés en astronomie ou en microscopie. Elle décrit également de nombreux modèles d'acquisition utilisés en imagerie médicale, notamment en imagerie par résonance magnétique (IRM : échantillonnage dans le domaine de Fourier) ou en tomographie (transformée de Radon). L'intérêt des approches basées sur les problèmes inverses réside dans leur formulation générale, qui les rend applicables à de nombreuses modalités, et dans leur capacité à fournir des estimateurs $\hat{u}$ ayant d'excellentes propriétés.
+
+
+\subsection{Exemples d'utilisation des problèmes inverses en traitement d'image et de signal.}
+
+\subsubsection{Utilisation pour les caméras à un  pixel}
+
+Une caméra à pixel unique est un dispositif qui capture des images en utilisant un seul capteur. Elle fonctionne en corrélant une image réelle avec des vecteurs aléatoires de Bernoulli et en mesurant ces corrélations sur un unique pixel. Cela permet de reconstruire l'image à partir d'un nombre limité de mesures.
+
+Cette reconstruction constitue un problème inverse, car elle consiste à retrouver un signal complet (l'image) à partir de données incomplètes (les mesures). Un petit miroir, étant activé ou désactivé, contribue ou non à l'intensité lumineuse mesurée par le capteur. De cette manière, on réalise le produit scalaire \( \langle z, b \rangle \) de l'image \( z \) avec un vecteur \( b \) contenant des uns aux emplacements correspondant aux miroirs activés et des zéros ailleurs.
+
+On peut également réaliser des produits scalaires avec des vecteurs \( a \) contenant uniquement \( +1 \) et \( -1 \) avec une probabilité égale, en définissant deux vecteurs auxiliaires \( b_1, b_2 \in \{0,1\}^N \) via :
+\[
+b_1^j = 
+\begin{cases} 
+1 & \text{si } a_j = 1, \\
+0 & \text{si } a_j = -1 
+\end{cases}, \quad
+b_2^j = 
+\begin{cases} 
+1 & \text{si } a_j = -1, \\
+0 & \text{si } a_j = 1 
+\end{cases}
+\]
+
+de sorte que \( \langle z, a \rangle = \langle z, b_1 \rangle - \langle z, b_2 \rangle \). En choisissant des vecteurs \( a_1, \ldots, a_m \) indépendamment au hasard, avec des entrées prenant les valeurs \( \pm 1 \) avec une probabilité égale, les intensités mesurées \( y = \langle z, a \rangle \) correspondent à des produits scalaires avec des vecteurs de Bernoulli indépendants. Par conséquent, nous avons \( y = Az \), où \( A \in \mathbb{R}^{m \times N} \) est une matrice de Bernoulli (aléatoire). Cette opération est appliquée sur l'image \( z \).
+
+
+En rappelant que \( z = Wx \) où \( x \in \mathbb{R}^N \) est un vecteur parcimonieux (un vecteur dont la plupart des éléments sont nuls ou proches de zéro)  et \( W \in \mathbb{R}^{N \times N} \) est une matrice unitaire représentant la transformation 
+et en écrivant \( A' = AW \), on obtient le système :
+\[
+y = A'x,
+\]
+ Dans cette situation, les mesures sont prises séquentiellement. Comme ce processus peut être chronophage, il est souhaitable de n'utiliser qu'un nombre limité de mesures. Ainsi, nous arrivons au problème standard de compression de l'information. Ce dernier permet la reconstruction de \( x \) à partir de \( y \), et l'image est finalement déduite comme \( z = Wx \).
+
+
+\begin{figure}[H] % 'h' pour positionner ici
+    \centering
+    \includegraphics[width=0.8\textwidth]{camera 1 pixel.png}
+    \caption{Représentation schématique d'une caméra à pixel unique  \cite{foucart2013invitation}}
+    \label{fig:1}
+\end{figure}
+
+
+\subsubsection{Utilisation en imagerie par résonance magnétique (IRM) }
+
+L'imagerie par résonance magnétique (IRM) est une technologie médicale avancée qui utilise des champs magnétiques et des ondes radiofréquence pour visualiser les structures internes du corps. Les atomes d'hydrogène présents dans les tissus réagissent aux champs magnétiques en émettant des signaux, qui sont mesurés et traités pour reconstruire des images détaillées des tissus et organes.
+
+Les problèmes inverses en IRM sont essentiels pour transformer ces signaux en images anatomiques significatives. La reconstruction d'images précises est complexe en raison de la nature indirecte et bruitée des données. Les techniques de résolution de problèmes inverses sont utilisées pour convertir les mesures brutes en images interprétables. Cela implique de traiter les données pour corriger les imperfections et réduire le bruit, puis d'appliquer des méthodes d'optimisation et de régularisation pour obtenir des images de haute qualité.
+
+L'opérateur linéaire associé à l'IRM dans la résolution de problèmes inverses est souvent représenté par la matrice de Fourier. En termes mathématiques, l'IRM mesure les coefficients de Fourier de la magnétisation transverse du corps. Ces coefficients sont obtenus en appliquant une transformation de Fourier aux signaux mesurés par les capteurs.
+
+En notation, si \( X(z) \) représente la magnétisation transverse à la position \( z \), les mesures \( y \) obtenues par l'IRM peuvent être exprimées comme :
+\[
+y = \mathcal{F}(X(z)),
+\]
+où \( \mathcal{F} \) est l'opérateur de transformation de Fourier. La reconstruction de l'image du corps à partir des mesures \( y \) implique l'inversion de cette transformation, ce qui constitue le problème inverse en IRM.
+
+
+\begin{figure}[H] % 'H' pour positionner ici
+    \begin{center}
+    \includegraphics[scale=0.5]{cerveau irm.png}
+    \caption{Image capturée par l'IRM (Image disponible \href{https://www.lesnumeriques.com/sante-sport/des-images-inedites-du-cerveau-humain-ont-ete-capturees-par-le-plus-puissant-irm-au-monde-n220416.html}{\textcolor{green}{ici}})}
+    \label{fig:2}
+    \end{center}
+\end{figure}
+
+
+\section{Méthode variationnelle}
+Les premiers travaux sur les problèmes inverses remontent à la définition du concept de problème bien posé, proposé par J. Hadamard en 1902 \cite{hadamard1902problemes}, basé sur trois critères fondamentaux : l’existence, l’unicité et la stabilité de la solution. Par nature, la majorité des problèmes inverses rencontrés en traitement du signal et des images (TSI) sont considérés comme mal posés. Lorsque \( A \) n’est pas inversible, de nombreuses recherches ont été initiées pour proposer des méthodes de résolution, notamment l’approche du maximum de vraisemblance introduite par R.A. Fisher en 1922. Cette méthode se ramène à la résolution des moindres carrés lorsque \( \epsilon \) est un bruit blanc gaussien, et à la pseudo-inverse de Moore-Penrose si \( A \) est en plus linéaire, selon l’expression :
+\[
+u \in \text{Argmin}_u \|Au - z\|_2^2 = (A^*A)^{-1}A^*z,
+\]
+où \( A^* \) désigne l’adjoint de \( A \).
+
+Cependant, ces estimateurs sont souvent impraticables ou produisent des solutions irrégulières en raison de l’amplification du bruit de mesure, principalement causée par le mauvais conditionnement de \( A \). Pour pallier cette difficulté, des solutions visant à améliorer le conditionnement de \( A \), telles que la décomposition en valeurs singulières tronquées (SVD tronquée) \cite{hansen1998rank}, ont été proposées. Une autre approche consiste à régulariser la solution par des méthodes variationnelles pénalisées.
+
+Depuis ces travaux fondateurs, les avancées majeures ont porté sur la résolution des problèmes inverses par la minimisation d’un critère variationnel de la forme suivante :
+\[
+\mathbf{u} \in \text{Argmin}_{\mathbf{u} \in \mathcal{C}} \left( \psi(A\mathbf{u}, \mathbf{z}) + \lambda \phi(\mathbf{u}) \right), \tag{2}
+\]
+où \( \mathcal{C} \subset \mathbb{R}^N \) représente l’ensemble des solutions admissibles, \( \psi \) est une mesure de "distance" entre les observations \( \mathbf{z} \) et leur modèle (représentation mathématique des données observées), \( \phi \) est un terme de pénalisation qui limite les solutions irrégulières, et \( \lambda > 0 \) est un paramètre de régularisation permettant de trouver un équilibre entre la fidélité aux données (\( \psi \)) et la régularisation (\( \phi \)).
+
+Cette minimisation générique permet de traiter efficacement le mauvais conditionnement des matrices (opérateurs) lorsque \( \lambda > 0 \). Par ailleurs, les solutions irrégulières obtenues par maximum de vraisemblance peuvent être retrouvées en prenant \( \lambda = 0 \).
+
+\subsection{Hyperparamètre et Dimensionalité}
+
+\subsubsection{Hyperparamètre}
+Une question sensible dans la résolution des problèmes inverses par approche variationnelle concerne le choix de l’hyperparamètre \( \lambda \). Les principales techniques proposées pour régler automatiquement ce paramètre sont la minimisation d’estimateurs de l’erreur quadratique moyenne 
+(estimateur non-biaisé du risque de Stein : SURE)\cite{deledalle2014stein}, la validation croisée généralisée (GCV) \cite{golub1979generalized}, la courbe en L \cite{hansen1998rank}, ou les approches bayésiennes par marginalisation de la distribution a posteriori ou méthodes MCMC (ces dernières nécessitant de spécifier la densité de probabilité de \( \lambda \)).
+
+\subsubsection{Dimensionalité}
+La résolution de problèmes inverses en imagerie fait face à une augmentation constante du volume de données à traiter, mais bénéficie également de l’accroissement de la puissance de calcul des ordinateurs. Les développements méthodologiques et algorithmiques, combinés aux avancées en performances numériques, ont permis de passer de l’analyse d’images composées de \( N = 10^3 \) pixels dans les années 80 \cite{geman1984stochastic} à l’analyse d’images hyperspectrales de taille \( 10^7 \) \cite{guilloteau2020hyperspectral} quarante ans plus tard, et ce, pour un temps de calcul équivalent. Ces avancées ont également permis d’améliorer les performances de reconstruction grâce à l’utilisation de pénalisations \( \phi \) finement choisies.
+
+\subsection{Pénalisation/Régularisation}
+Une première catégorie de pénalisations concerne des fonctions différentiables et convexes, telles que la régularisation de Tikhonov \cite{tikhonov1963solution}, introduite dans les années 1960 et également connue sous le nom de régression de ridge. Cette méthode favorise des solutions lisses. La régularisation de Tikhonov peut également être interprétée comme un filtrage de Wiener (1949), utilisant les connaissances sur les densités spectrales du bruit et du signal. On peut également mentionner la pénalisation de Huber \cite{huber1992robust}, qui permet d'approcher la norme \(\ell_1\) et favorise des solutions parcimonieuses.
+
+À partir des années 1990, la résolution des problèmes inverses a connu une révolution grâce aux pénalisations non lisses, parmi lesquelles la pénalisation par variation totale, proposée par Rudin, Osher et Fatemi (ROF) \cite{rudin1992nonlinear}, est sans aucun doute la plus connue. Sa définition originale a été formulée dans un contexte continu. En version discrétisée, plusieurs définitions de la variation totale existent, dépendant essentiellement du choix de l’opérateur de discrétisation. La formulation usuelle de la variation totale isotrope s'exprime comme suit :
+
+\[
+\phi(u) = \|Du\|_{2,1}  = \sum_{n=(n_1,n_2)} \sqrt{((D_1 u)_{n_1,n_2})^2 + ((D_2 u)_{n_1,n_2})^2},
+\]
+
+où \((D_1 u)_{n_1,n_2} = u_{n_1+1,n_2} - u_{n_1,n_2}\) et \((D_2 u)_{n_1,n_2} = u_{n_1,n_2+1} - u_{n_1,n_2}\).
+
+La pénalisation par variation totale permet d'obtenir d'excellentes performances en débruitage, notamment lorsque l'image présente de vastes régions uniformes. Cependant, pour les images naturelles, cette méthode engendre un effet de staircasing (ou effet d'escalier)   que les utilisateurs préfèrent éviter. Par exemple, en astronomie, une version lissée de la variation totale est souvent utilisée : la pénalisation par variation totale hyperbolique \cite{charbonnier1997deterministic}, qui s'exprime comme suit :
+
+\[
+\phi(u) = \sum_{n} \sqrt{ \| (Du)_n \|_2^2 + \nu},
+\]
+
+introduisant un paramètre supplémentaire \(\nu > 0\) à ajuster. Cette approche présente l'avantage de lisser l'effet constant par morceaux et de fournir une transition plus fluide, ce qui peut sembler plus réaliste dans certaines modalités d'imagerie.
+
+
+
+Il existe également des formes avancées de pénalisation par variation totale, telles que la variation totale généralisée (TGV) \cite{bredies2010total}, la variation totale non-locale, ou des pénalisations par tenseurs de structure \cite{chierchia2014nonlocal}.
+
+Une troisième catégorie de pénalisation repose sur l’utilisation de pénalisations non convexes de type \(\ell_1\)-pondérée ou quadratique tronquée \cite{nikolova2005analysis}, qui introduisent cependant des difficultés algorithmiques associées à la minimisation.
+
+Enfin, une dernière classe de pénalisation, basée sur l'apprentissage, est apparue récemment.
+
+
+\subsection{Interprétation bayésienne}
+Pour mieux comprendre la formulation générique (2), il peut être utile d’utiliser une approche bayésienne. Supposons que \( u \) et \( z \) soient des réalisations de vecteurs aléatoires \( U \) et \( Z \). L’estimation peut alors être effectuée à l’aide de la stratégie du Maximum A Posteriori (MAP). L’objectif est de trouver \( u \) qui maximise la distribution a posteriori \( \mu_{U|Z=z} \). Cette distribution peut être reformulée grâce au théorème de Bayes, puis simplifiée à l’aide du logarithme, comme suit :
+\[
+\hat{u} \in \operatorname{Argmin}_{u \in \mathbb{R}^N} \left( 
+\underbrace{-\log \mu_{Z|U=u}(z)}_{\text{(vraisemblance)}} + 
+\underbrace{-\log \mu_U(u)}_{\text{(a priori)}}
+\right) \tag{3}
+\]
+Le premier terme de (3), qui mesure l’adéquation aux observations \( z \), dépend du modèle de formation des données (1). Par exemple, lorsque \( \epsilon \) représente un bruit blanc gaussien de variance \( \sigma^2 \) et \( A \in \mathbb{R}^{M \times N} \), la vraisemblance est donnée par :
+
+\begin{equation}
+\mu_{Z|U=u}(z) = (2\pi\sigma^2)^{-M/2} e^{-\frac{\|Au - z\|^2}{2\sigma^2}},
+\end{equation}
+
+ce qui conduit à l’expression suivante :
+
+\begin{equation}
+\psi(A\mathbf{u}, \mathbf{z}) = \frac{1}{2\sigma^2} \|Au - z\|^2 
+\end{equation} 
+Ce raisonnement peut également être utilisé pour justifier une attache aux données de type divergence de Kullback-Leibler dans le cas où le modèle d’acquisition suit un processus de Poisson \cite{pustelnik2016wavelet}.
+
+Le second terme est lié aux informations a priori sur l’image originale et conduit à :
+\begin{equation}
+\phi(u) = -\log \mu_U(u).
+\end{equation}
+Dans le domaine de la restauration d’images, les modèles bayésiens sont souvent utilisés pour justifier le choix de l’attache aux données. En revanche, les modèles de pénalisation viennent plutôt de la littérature sur les ondelettes, la parcimonie ou les modèles variationnels continus.
+
+\section{Opérateurs Proximaux}
+Les avancées algorithmiques majeures pour la résolution de problèmes inverses proviennent de deux sources : l’adaptation des propriétés des fonctions \(\phi\) et \(\psi\), et les progrès en optimisation numérique.
+
+Les travaux fondateurs sur les problèmes inverses sont liés à l’algorithme de gradient explicite et à ses versions accélérées (par exemple, Levenberg-Marquardt ou L-BFGS) \cite{nocedal1999numerical}. À partir des années 2000, l’apparition des méthodes proximales \cite{bauschke2017correction} (basées sur le sous-gradient implicite) a permis de traiter des volumes importants de données combinés à des pénalisations avancées (comme celles présentées dans la section précédente), offrant des gains significatifs en qualité de reconstruction.
+
+Ces méthodes s’appuient sur la notion clé d’opérateur proximal \cite{moreau1965proximite}, défini pour une fonction \(\phi\) et tout \(\tau > 0\) comme :
+\[
+\forall z \in \mathbb{R}^N, \quad \text{prox}_{\tau}^{\phi}(z) = \arg \min_{ u\in \mathbb{R}^N} \left( \|u - z\|_2^2 + \tau \phi(u) \right) \tag{5}
+\]
+Cet opérateur généralise la projection sur un ensemble convexe \(C\), notée \(P_C\), en posant que \(\text{prox}_{\chi_C} = P_C\), où \(\chi_C(u) = 0\) si \(u \in C\), et \(+\infty\) sinon. Par exemple, l’opérateur proximal de la norme \(\ell_1\) correspond à une opération de seuillage doux de paramètre \(\tau\).
+
+Les méthodes proximales unifient l’optimisation lisse sous contrainte et l’optimisation non lisse. Pour un problème de la forme $\min_{u \in \mathbb{R}^N} f(u)$, où \(f\) est convexe et non lisse, une itération de l’algorithme proximal (sous-gradient implicite) s’écrit :
+\[
+u^{[k+1]} = \text{prox}_{\tau_k}^{f}(u^{[k]}), \hspace{0.2cm} \text{où} \hspace{0.2cm} \tau_k > 0 \tag{6}
+\]
+Lorsque \(f\) est différentiable, le sous-gradient se réduit au gradient. La convergence de ces méthodes est plus flexible grâce à un choix de pas \(\tau_k\) moins contraignant.
+
+Lorsqu’il s’agit de minimiser une somme de fonctions (par exemple \(f = \psi + \lambda \phi\)), il est nécessaire d’utiliser des algorithmes de type éclatement (splitting). L’algorithme explicite-implicite (forward-backward, FB) \cite{chaux2007variational} , est particulièrement adapté si \(\psi\) possède un gradient \(L\)-Lipschitz. Les itérations prennent la forme :
+
+\[
+u^{[k+1]} = \text{prox}_{\lambda}^{\phi} \Big(u^{[k]} - \tau_k \nabla \psi(u^{[k]})\Big), \tag{7}
+\]
+
+avec \(\tau_k < 2L^{-1}\). L’étape explicite gère l’inversion de \(A\), tandis que l’étape implicite applique les pénalisations. Toutefois, calculer l’opérateur proximal peut être coûteux, nécessitant parfois des sous-itérations. Dans ces cas, des algorithmes primaux-duaux \cite{chambolle2016introduction} sont plus efficaces.
+
+Pour les fonctions non convexes, des résultats basés sur l’inégalité de Kurdyka-Łojasiewicz permettent de garantir la convergence vers un point critique. Ces méthodes sont particulièrement utiles pour des problèmes complexes, comme les pénalisations non convexes ou la déconvolution aveugle \cite{chouzenoux2014variable}.
+\section{Introduction aux méthodes Plug and Play (PnP)}
+
+\modif{La référence principale de cette partie est l'article de U. S. Kamilov \cite{kamilov2023plug}.}\\
+
+Les méthodes Plug-and-Play (PnP) représentent une avancée significative dans le domaine de la restauration d'images, en intégrant les capacités des débruiteurs basés sur des réseaux de neurones profonds dans des algorithmes d'optimisation classiques. Ces méthodes exploitent la puissance de l'apprentissage profond pour améliorer la qualité des images tout en conservant une flexibilité qui permet d'adapter les techniques de régularisation à divers types de bruits et d'artéfacts.
+
+
+Traditionnellement, la restauration d'images reposait sur des méthodes de régularisation classiques, telles que la méthode des moindres carrés ou des approches basées sur l'ADMM (Alternating Direction Method of Multipliers) et la méthode de gradient proximal (PGM). Ces techniques, bien que efficaces, présentent souvent des limitations en termes de flexibilité et de capacité à s'adapter à des scénarios variés de bruit. Avec l'émergence des réseaux de neurones convolutifs (CNN), il est devenu possible de concevoir des débruiteurs qui apprennent à partir de données réelles, offrant ainsi des performances supérieures par rapport aux méthodes classiques.
+
+\subsection{Principes des Méthodes PnP}
+
+L’originalité des méthodes Plug-and-Play (PnP) réside dans l’intégration d’un opérateur de débruitage au sein des algorithmes d’optimisation. Plutôt que de minimiser directement \( \phi(\mathbf{u}) \), ces méthodes remplacent l’opérateur proximal de \( \phi \) par un débruiteur \( R_\theta \), qui peut être un réseau neuronal pré-entraîné ou une méthode de débruitage classique.
+
+Dans ce cadre, le terme \( \phi(\mathbf{u}) \) n'est pas explicitement défini. À la place, l'application d'un opérateur de débruitage \( R_\theta \) permet une approximation implicite. Ainsi, plutôt que de résoudre :
+\[
+\mathbf{u} \leftarrow \text{prox}_{\lambda}^{\phi}(\mathbf{v}),
+\]
+on effectue une mise à jour de la forme suivante :
+\[
+\mathbf{u} \leftarrow R_\theta(\mathbf{v}), 
+\]
+où \( \mathbf{v} \) représente une solution intermédiaire. L’opérateur \( R_\theta \) peut correspondre à un réseau neuronal convolutif (CNN) pré-entraîné ou à une méthode de débruitage traditionnelle, telle que le filtre NL-means.
+
+Des algorithmes tels que le Deep Plug-and-Play Image Restoration (DPIR) exploitent cette approche pour résoudre efficacement les problèmes inverses. Par un processus itératif, ils réduisent progressivement le bruit ou les artéfacts présents dans l’image, améliorant ainsi la qualité de la reconstruction à chaque étape.
+
+\subsection{Intégration des opérateurs PnP dans des méthodes d’optimisation}
+
+Les méthodes Plug-and-Play (PnP) s’intègrent naturellement dans les algorithmes d’optimisation classiques, comme l’ADMM (Alternating Direction Method of Multipliers) et la méthode de gradient proximal (PGM). Elles remplacent l’étape classique de régularisation par un opérateur de débruitage \( R_\theta \), offrant ainsi une approche modulable et puissante pour résoudre des problèmes inverses.
+
+\subsubsection{Méthode PnP-ADMM (Alternating Direction Method of Multipliers)}
+
+L’ADMM reformule un problème d’optimisation en introduisant une variable auxiliaire afin de découpler les différents termes de la fonction objectif. Le problème s’écrit :
+\[
+\min_{\mathbf{u}, \mathbf{v}} \left( \psi(A\mathbf{u}, \mathbf{z}) + \lambda \phi(\mathbf{v}) \right) \quad \text{sous la contrainte } \mathbf{u} = \mathbf{v}.
+\]
+L’algorithme ADMM met à jour les variables de manière itérative selon trois étapes :
+\begin{itemize}
+    \item [$\diamond$] \textbf{Mise à jour de \( \mathbf{u} \)} :
+    \[
+    \mathbf{u}^{k+1} \leftarrow \arg\min_{\mathbf{u}} \left( \psi(A\mathbf{u}, \mathbf{z}) + \frac{\rho}{2} \| \mathbf{u} - \mathbf{v}^k + \mathbf{y}^k \|_2^2 \right),
+    \]
+     où $\rho $ est un paramètre de pénalité
+    \item [$\diamond$] \textbf{Mise à jour de \( \mathbf{v} \)} :
+     \begin{align*}
+    \mathbf{v}^{k+1} &\leftarrow \arg\min_{\mathbf{v}} \left( \lambda \phi(\mathbf{v}) + \frac{\rho}{2} \| \mathbf{u}^{k+1} - \mathbf{v} + \mathbf{y}^k \|_2^2 \right), \\\\
+    \mathbf{v}^{k+1} &\leftarrow  \text{prox}_{\frac{\lambda}{\rho}}^{\phi}( \mathbf{u}^{k+1} + \mathbf{y}^k). 
+     \end{align*}
+    \item [$\diamond$] \textbf{Mise à jour du multiplicateur de Lagrange \( \mathbf{y} \)} :
+    \[
+    \mathbf{y}^{k+1} \leftarrow \mathbf{y}^k + (\mathbf{u}^{k+1} - \mathbf{v}^{k+1}).
+    \]
+\end{itemize}
+Dans le cadre des méthodes PnP, l’étape de mise à jour de \( \mathbf{v} \) est remplacée par une application de l’opérateur de débruitage \( R_\theta \), ce qui donne :
+\[
+\mathbf{v}^{k+1} \leftarrow R_\theta(\mathbf{u}^{k+1} + \mathbf{y}^k).
+\]
+L’algorithme PnP-ADMM peut alors être résumé ainsi :
+\begin{enumerate}
+    \item Mettre à jour \( \mathbf{u} \) en minimisant \( \psi \),
+    \item Appliquer le débruitage \( R_\theta \) pour mettre à jour \( \mathbf{v} \),
+    \item Mettre à jour le multiplicateur \( \mathbf{y} \) pour imposer la contrainte \( \mathbf{u} = \mathbf{v} \).
+\end{enumerate}
+
+Cette approche assure une convergence rapide et stable, en particulier pour des problèmes mal posés.
+
+\subsubsection{Méthode PnP-PGM (Proximal Gradient Method)}
+
+La méthode de gradient proximal (PGM) est adaptée aux problèmes de la forme :
+\[
+\min_{\mathbf{u}} \left( \psi(A\mathbf{u}, \mathbf{z}) + \lambda \phi(\mathbf{u}) \right).
+\]
+Elle fonctionne par des mises à jour itératives comportant deux étapes principales :
+\begin{itemize}
+    \item [$\diamond$] \textbf{Descente de gradient sur le terme de fidélité \( \psi \)} :
+    \[
+    \mathbf{v} \leftarrow \mathbf{u}^k - \gamma \nabla \psi(A\mathbf{u}^k, \mathbf{z}),
+    \]
+    où  $\gamma$ est le pas de gradient.
+    \item [$\diamond$] \textbf{Régularisation via l’opérateur proximal} :
+    \[
+    \mathbf{u}^{k+1} \leftarrow \text{prox}_{\lambda}^{\phi}(\mathbf{v}).
+    \]
+\end{itemize}
+En remplaçant ici l'opérateur proximal par un débruiteur \( R_\theta \). La mise à jour devient :
+\[
+\mathbf{u}^{k+1} \leftarrow R_\theta(\mathbf{v}).
+\]
+L’algorithme PnP-PGM se résume alors à son tour comme suit :
+\begin{enumerate}
+    \item Effectuer une étape de descente de gradient sur \( \psi \),
+    \item Appliquer le débruitage \( R_\theta \) pour obtenir la régularisation.
+\end{enumerate}
+
+Bien que plus simple à implémenter que PnP-ADMM, PnP-PGM peut se révéler moins robuste pour certains types de problèmes inverses complexes.
+
+\subsection{Architecture du débruiteurs utilisé (DRUNet) :}
+
+Le choix du débruiteur est crucial, car il détermine non seulement les performances de restauration, mais également le temps de calcul et la convergence de l'algorithme. Alors que les approches traditionnelles s’appuyaient principalement sur des débruiteurs classiques, les méthodes récentes privilégient désormais des modèles basés sur des réseaux de neurones convolutifs profonds (CNN). Cette transition, largement documentée dans la littérature, met en évidence les progrès significatifs réalisés grâce aux débruiteurs CNN dans les tâches de restauration d’images.
+
+Cependant, les débruiteurs classiques les plus performants sont souvent gourmands en temps de calcul, ce qui limite leur utilisation dans des schémas itératifs plug-and-play nécessitant de nombreuses itérations. En revanche, l’intégration de débruiteurs basés sur des CNN permet de développer des algorithmes à la fois performants et plus rapides, optimisant ainsi le temps de calcul.
+
+Un exemple emblématique dans la littérature PnP est l’architecture DRUNet \cite{zhang2021plug}, présentée dans la figure suivante. Ce modèle repose sur l’empilement de blocs ResNet \cite{he2016deep} intégrés dans une architecture de type UNet. Les débruiteurs basés sur UNet exploitent des informations apprises à l’avance sur les images, telles que leurs structures ou propriétés, pour améliorer les performances de restauration (\cite{ho2020denoising}, \cite{song2019generative}, \cite{song2021train}). À l’instar de DnCNN, ces modèles sont entraînés pour approximer le bruit ou une version redimensionnée de celui-ci, offrant ainsi des performances remarquables dans le cadre des schémas plug-and-play.
+
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=1.54 \linewidth, totalheight=0.3 \textheight, angle=0, scale= 0.65, minipage= 2\linewidth, margin= 0}
+\includegraphics[width=1\textwidth]{denoiser_arch.png}
+\end{adjustbox}
+\caption{Architecture du débruiteur DRUNet (\cite{zhang2021plug})} 
+    
+    \label{fig:3}
+\end{figure}   
+
+
+\section{Comparaison TV vs DRUNet : Expérience Numérique} 
+
+Dans cette section, nous analysons les performances de l'algorithme FISTA associé à la méthode de variation totale (TV) et au Plug-and-Play (PnP) utilisant le débruiteur DRUNet. L'étude porte sur des images dégradées par différents niveaux de flou et de bruit, aussi bien faibles qu’élevés, ainsi que par des masques variés. Nous examinerons l’adaptabilité de chaque méthode face à ces variations et comparerons leurs performances en termes de qualité de reconstruction.
+
+ Trois ensembles d’images distincts (Butterfly, Leaves et Starfish) sont utilisés pour évaluer les performances des deux approches en termes de PSNR (Peak Signal-to-Noise Ratio), une métrique quantitative où des valeurs plus élevées indiquent une meilleure qualité de reconstruction.
+ 
+\subsection{Application TV vs DRUNet (Images faiblement bruitées)}
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=0.985\linewidth, totalheight=0.47 \textheight, angle=0, scale= 0.9, minipage= 4.2\linewidth, margin= 0}
+\includegraphics[width=1\textwidth]{../results/Imgs_denoised_sig15_comparison.png}
+\end{adjustbox}
+\caption{Débruitage d'images avec un niveau de bruit $\sigma = 0.06 \simeq \frac{15}{255}$} 
+    
+    \label{fig:4}
+\end{figure}   
+
+La \hyperref[fig:4]{Figure 1.4} montre la comparaison entre les méthodes TV (Variation Totale) et DRUNet (Deep Residual U-Net) pour le débruitage d’images présentant un faible niveau de bruit (\(\sigma=0.06\)).
+
+Pour les trois exemples étudiés, le PSNR des images bruitées est d’environ 24.5 dB. Après débruitage, la méthode TV améliore le PSNR à environ 29 dB, tandis que DRUNet atteint des valeurs comprises entre 34 et 35 dB, soit un gain moyen de 5 à 6 dB en faveur de DRUNet.
+
+En observant les résultats visuels, la méthode TV réduit efficacement le bruit mais adoucit légèrement les contours et atténue certains détails fins, particulièrement visibles sur les motifs des ailes du papillon ou les fines feuilles de la plante. En revanche, DRUNet conserve mieux les structures complexes et les textures, offrant une reconstruction à la fois plus réaliste et détaillée. 
+
+Ces résultats confirment la supériorité de DRUNet, qui améliore à la fois le PSNR et la préservation des détails visuels. 
+
+
+\subsection{Application TV vs DRUNet (Images fortement bruitées)}
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=0.985\linewidth, totalheight=0.47 \textheight, angle=0, scale= 0.9, minipage= 4.2\linewidth, margin= 0}
+\includegraphics[width=1\textwidth]{../results/Imgs_denoised_sig50_comparison.png}
+\end{adjustbox}
+    \caption{Débruitage d'images avec un niveau de bruit
+    $\sigma = 0.2 \simeq \frac{50}{255}$}
+    \label{fig:5}
+\end{figure}
+
+La \hyperref[fig:5]{Figure 1.5} illustre l’efficacité des méthodes TV et DRUNet pour le débruitage d’images fortement bruitées (\(\sigma = 0.2\)). Les trois ensembles d’images permettent d’évaluer la capacité des deux approches à gérer ce niveau de bruit élevé.
+
+Pour les images bruitées, le PSNR initial est d’environ 15 dB. Après application des algorithmes, la méthode TV parvient à améliorer le PSNR à des valeurs comprises entre 22 et 24 dB, tandis que DRUNet surpasse ces performances avec des valeurs atteignant 28 à 29 dB. Le gain de 6 à 7 dB en faveur de DRUNet est encore plus significatif dans ce scénario de bruit important, soulignant son efficacité accrue.
+
+En termes de qualité visuelle, la méthode TV, bien qu'efficace pour réduire l'intensité du bruit, présente des limites en termes de préservation des détails. Les contours deviennent flous, et les textures complexes, comme les motifs des ailes du papillon ou les surfaces de l’étoile de mer, perdent en clarté. DRUNet, en revanche, conserve une meilleure fidélité aux structures fines et aux textures complexes. Les détails visuels, notamment sur les motifs de l'image des feuilles, sont significativement mieux préservés.
+
+Ces résultats confirment que DRUNet est particulièrement performant pour la restauration d'images fortement bruitées, en offrant une amélioration significative du PSNR tout en préservant une meilleure qualité visuelle. De plus, en utilisant une initialisation par des zéros, des résultats similaires ont été obtenus (\hyperref[fig:12]{Figure 2.1} et \hyperref[fig:14]{Figure 2.3})
+
+\subsection{Application TV vs DRUNet (Images faiblement floutées)}
+
+\subsubsection{Défloutages d'images}
+
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=0.985\linewidth, totalheight=0.47 \textheight, angle=0, scale= 0.9, minipage= 4.2\linewidth, margin= 0}
+    \includegraphics[width=1\textwidth]{../results/Imgs_deblurred_sig_1_comparison.png}
+\end{adjustbox}
+    \caption{ Défloutage d'images avec un niveau de flou $\sigma = 1$}
+    \label{fig:6}
+\end{figure} 
+
+La \hyperref[fig:6]{Figure 1.6} illustre les performances des méthodes TV et DRUNet pour la restauration d’images présentant un faible niveau de flou (\(\sigma = 1\)). 
+
+Pour les images floues, le PSNR initial varie entre 23.87 et 27.80 dB, selon les exemples. Après application des algorithmes, la méthode TV atteint des valeurs comprises entre 35 et 37 dB, tandis que DRUNet présente des performances légèrement inférieures, avec des valeurs allant de 32 à 35 dB. Ces résultats montrent que TV est plus efficace pour améliorer le PSNR dans le cas d’un faible flou.
+
+De même, en termes de qualité visuelle, la méthode TV semble mieux préserver les motifs complexes par rapport à DRUNet, comme en témoignent les détails des ailes du papillon et l’arrière-plan de l’étoile de mer.
+
+En conclusion, pour un faible niveau de flou, la méthode TV se distingue par une qualité visuelle supérieure et un meilleur gain en PSNR comparé à DRUNet. Cette différence peut s'expliquer par la capacité de DRUNet à s’appuyer sur des données apprises, tandis que TV utilise une régularisation ciblée spécifiquement adaptée à ce type de dégradation.
+
+
+\subsubsection{Évolution comparative du PSNR}
+
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=0.985\linewidth, totalheight=0.47 \textheight, angle=0, scale= 0.9, minipage= 4.2\linewidth, margin= 0}
+    \includegraphics[width=1\textwidth]{../results/Imgs_deblurred_sig_1_psnr_plot.png}
+\end{adjustbox}
+    \caption{Évolution comparative du PSNR pour différentes méthodes de débruitage (\(\sigma = 1\))}
+    \label{fig:7}
+\end{figure} 
+
+La \hyperref[fig:7]{Figure 1.7} montre l’évolution du PSNR en fonction des itérations pour les méthodes TV et DRUNet appliquées à notre ensembles d’images avec un niveau de flou fixé à \(\sigma = 1\).
+
+Les courbes des méthodes TV (bleu, vert, violet) progressent rapidement dans les premières itérations, atteignant un plateau élevé autour de 35-37 dB. Cette évolution met en évidence l’efficacité de la méthode TV pour corriger un faible niveau de flou, grâce à sa régularisation ciblée qui favorise la préservation des contours et des zones uniformes.
+
+En comparaison, les courbes des méthodes DRUNet (orange, rouge, marron) affichent une convergence plus lente, atteignant des valeurs stabilisées entre 32 et 35 dB. Bien que DRUNet ne parvienne pas à surpasser TV en termes de PSNR, son comportement plus régulier traduit une capacité à produire des résultats visuellement cohérents et naturels.
+
+Ces résultats mettent en évidence que, pour un faible niveau de flou, la méthode TV se distingue par de meilleures performances quantitatives (PSNR), tandis que DRUNet demeure une approche pertinente.
+
+
+\subsection{Application TV vs DRUNet (Images fortement floutées)}
+
+\subsubsection{Défloutages d'images}
+
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=0.985\linewidth, totalheight=0.47 \textheight, angle=0, scale= 0.9, minipage= 4.2\linewidth, margin= 0}
+    \includegraphics[width=1\textwidth]{../results/Imgs_deblurred_sig_3_comparison.png}
+\end{adjustbox}
+    \caption{Défloutage d'images avec un niveau de flou $\sigma = 3$}
+    \label{fig:8}
+\end{figure} 
+
+La \hyperref[fig:8]{Figure 1.8} compare les performances des méthodes TV et DRUNet pour la restauration d’images fortement floutées (\(\sigma = 3\)). Les performances des deux approches sont évaluées en termes de PSNR et de qualité visuelle.
+
+Pour les images floutées, les PSNR initiaux varient entre 16.14 et 21.43 dB, selon les images. Après restauration, la méthode TV atteint des valeurs comprises entre 22 et 25 dB, tandis que DRUNet reste légèrement en retrait avec des scores allant de 19.8 à 23.9 dB. Ces résultats montrent que, dans le cas d’un flou important, TV offre un avantage en termes de PSNR, bien qu’il ne soit pas aussi marqué qu’avec un flou faible.
+
+En termes de qualité visuelle, des différences notables apparaissent. La méthode TV parvient à mieux restituer les contours principaux et les motifs complexes, notamment sur les détails de l’étoile de mer et des ailes du papillon. DRUNet, en revanche, peine à restituer ces détails complexes avec la même précision.
+
+En conclusion, pour un niveau élevé de flou, la méthode TV se distingue par une performance quantitative et une qualité visuelle légèrement supérieures à celles de DRUNet. Cette différence pourrait refléter une limite de DRUNet, notamment dans la gestion de certaines incertitudes ou du flou, qu’il ne prend pas explicitement en compte.
+
+\subsubsection{Évolution comparative du PSNR}
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=0.985\linewidth, totalheight=0.47 \textheight, angle=0, scale= 0.9, minipage= 4.2\linewidth, margin= 0}
+    \includegraphics[width=1\textwidth]{../results/Imgs_deblurred_sig_3_psnr_plot.png}
+\end{adjustbox}
+    \caption{Évolution comparative du PSNR pour différentes méthodes de défloutage (\(\sigma = 3\))}
+    \label{fig:9}
+\end{figure} 
+
+La \hyperref[fig:9]{Figure 1.9} illustre l'évolution du PSNR en fonction des itérations pour les méthodes TV et DRUNet appliquées à des images fortement floutées (\(\sigma = 3\)).
+
+Les courbes des méthodes TV (bleu, vert, violet) montrent une progression constante avec un plateau atteint après environ 150 itérations. Les valeurs finales de PSNR se situent entre 22 et 25 dB, ce qui reflète la capacité de TV à corriger partiellement les effets d’un flou important tout en préservant les contours principaux. La progression lente mais régulière indique une optimisation continue au fil des itérations.
+
+En revanche, les courbes des méthodes DRUNet (orange, rouge, marron) atteignent un plateau plus rapidement, dès les 50 premières itérations, avec des PSNR finaux légèrement inférieurs, entre 19.8 et 23.9 dB. Bien que DRUNet converge plus rapidement, il montre des performances limitées dans la gestion d’un flou important, probablement en raison de sa dépendance à des données d’apprentissage spécifiques et à une généralisation imparfaite dans ce contexte.
+
+Ces résultats mettent en évidence une différence clé entre les deux approches : TV excelle dans le traitement de flous sévères grâce à sa régularisation ciblée et continue à s’améliorer avec davantage d’itérations, tandis que DRUNet, bien qu’efficace dans les premières étapes, est limité par son architecture prédéfinie, particulièrement pour des dégradations non courantes. Par ailleurs, une initialisation par des zéros conduit aux mêmes observations (\hyperref[fig:16]{Figure 2.5} et \hyperref[fig:18]{Figure 2.7})
+
+\subsection{Application TV vs DRUNet (Images masquées et faiblement bruitées)}
+
+%\subsubsection{Inpainting d'images}
+
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=0.985\linewidth, totalheight=0.47 \textheight, angle=0, scale= 0.9, minipage= 4.2\linewidth, margin= 0}
+    \includegraphics[width=1\textwidth]{../results/Imgs_inpaint_simple_comparison.png}
+\end{adjustbox}
+    \caption{Inpainting d'images avec un niveau de bruit $\sigma = 0.06 \simeq \frac{15}{255}$}
+    \label{fig:10}
+\end{figure}
+
+La \hyperref[fig:10]{Figure 1.10} compare les performances des méthodes TV et DRUNet pour la restauration d’images affectées à la fois par un masque de type grille et un bruit faible ($\sigma = 0.06$, soit environ $15/255$).
+
+Les images corrompues présentent des PSNR initiaux relativement bas, variant entre 13.11 dB et 15.85 dB, en raison de la double dégradation causée par l’ajout du masque et du bruit. Après restauration, la méthode TV atteint des PSNR situés entre 26 et 28 dB, tandis que DRUNet atteint des valeurs supérieures, comprises entre 31 et 32 dB. Cette différence traduit l’efficacité de DRUNet pour combiner le traitement du bruit et la reconstruction des parties masquées.
+
+D’un point de vue qualitatif, la méthode TV parvient à combler les zones masquées et à atténuer le bruit, mais au prix d’une perte de précision locale. En revanche, DRUNet non seulement restaure les régions masquées, mais élimine également le bruit de manière plus efficace, offrant ainsi une reconstruction plus homogène et fidèle à l’image d’origine.
+
+En conclusion, pour un masque structuré et un bruit faible, DRUNet surpasse nettement la méthode TV en termes de PSNR et de qualité visuelle. Il permet une reconstruction plus précise des zones masquées et une meilleure conservation des textures complexes, confirmant ainsi son efficacité dans la gestion combinée du bruit et de l’inpainting.
+
+
+\subsection{Application TV vs DRUNet (Images masquées et Moyennement bruitées)}
+
+%\subsubsection{Inpainting d'images}
+
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=0.985\linewidth, totalheight=0.47 \textheight, angle=0, scale= 0.9, minipage= 4.2\linewidth, margin= 0}
+    \includegraphics[width=1\textwidth]{../results/Imgs_inpaint_medium_comparison.png}
+\end{adjustbox}
+    \caption{Inpainting d'une image avec un niveau de bruit $\sigma = 0.1 \simeq \frac{25}{255}$}
+    \label{fig:11}
+\end{figure}
+
+La \hyperref[fig:11]{Figure 1.11} illustre les performances des méthodes TV et DRUNet pour la restauration d’images altérées par un masque aléatoire et un bruit modéré (\(\sigma = 0.1\), soit environ \(25/255\)).
+
+Les images initialement dégradées présentent des PSNR très bas, allant de 5.42 dB à 8.59 dB, ce qui s'explique par la combinaison du masque et du bruit. Après restauration, la méthode TV atteint des PSNR situés entre 21 et 24 dB, tandis que DRUNet affiche des valeurs supérieures, comprises entre 27 et 28 dB. Ce gain de DRUNet confirme sa capacité à mieux traiter simultanément la suppression du bruit et la reconstruction des pixels masqués.
+
+D'un point de vue visuel, la méthode TV parvient à remplir les zones masquées, mais certaines régions restent altérées par du bruit résiduel et des textures incomplètes. En revanche, DRUNet offre une reconstruction plus détaillée et plus cohérente, supprimant presque totalement le bruit tout en restituant les motifs d'origine avec davantage de fidélité. Les structures fines, comme celle de l’étoile de mer, sont mieux préservées, aboutissant à une apparence plus naturelle.
+
+En conclusion, lorsque les images sont affectées simultanément par un masque aléatoire et un bruit modéré, DRUNet se démarque nettement par une meilleure reconstruction et une réduction plus efficace du bruit. Sa capacité à préserver les détails tout en supprimant les artefacts renforce son efficacité dans des scénarios complexes où le signal est fortement altéré. De manière équivalente, une initialisation par des zéros conduit aux mêmes observations (\hyperref[fig:20]{Figure 2.9} et \hyperref[fig:22]{Figure 2.11})
+
+\newpage
+
+\chapter{Apprentissage de fonction de régularisation convexe pour la résolution de problèmes inverses}
+\modif{La référence principale de ce chapitre est la thèse de A. GOUJON \cite{goujon2024towards}.}
+
+\section*{Introduction}
+
+L’émergence des techniques classiques et des approches basées sur l’apprentissage profond pour la reconstruction d’images a conduit à des améliorations significatives en termes de qualité. Cependant, ces nouvelles méthodes présentent souvent des limitations en matière de fiabilité et d’explicabilité. En effet, les modèles d’apprentissage profond peuvent afficher des comportements imprévisibles et générer des artefacts réalistes, notamment en imagerie médicale, ce qui peut potentiellement induire des diagnostics erronés. Leur nature de \textit{boîte noire} réduit la transparence des décisions prises, rendant difficile l’identification des biais présents dans les données d’entraînement. De plus, une petite variation dans des paramètres comme l’initialisation ou le pas d’apprentissage peut entraîner des résultats très différents, compliquant ainsi la stabilité des performances. L’interprétation des sorties nécessite souvent des analyses détaillées. Cela a suscité un intérêt croissant pour développer des solutions qui maintiennent ces gains de performance tout en remédiant à ces faiblesses.
+
+Dans ce chapitre, nous abordons cette problématique en revisitant des fonctions de régularisation formulées comme une somme de fonctions convexes en crête. Le gradient de ces fonctions de régularisation est paramétré à l’aide d’un réseau de neurones simple, constitué d’une unique couche cachée avec des fonctions d’activation croissantes et apprenables. Ce réseau est entraîné en quelques minutes et agit comme un débruiteur gaussien multi-étapes.
+
+Les expériences numériques menées sur des tâches de débruitage, ainsi que sur des problèmes de reconstruction sur nos images   , mettent en évidence des résultats prometteurs. En effet,les méthodes proposées permettent d’améliorer non seulement la qualité de reconstruction, mais aussi la robustesse et la fiabilité des modèles. Ces performances surpassent celles des approches traditionnelles offrant des garanties similaires, ouvrant ainsi de nouvelles perspectives pour une reconstruction d’images à la fois performante et explicable.
+
+\section{Introduction aux splines et leur application en Apprentissage Profond}
+
+Les splines, couramment utilisées en modélisation et en interpolation de données, sont constituées de segments polynomiaux reliés de manière à assurer la continuité et la régularité de la courbe.
+
+Dans cette partie, leur adoption repose sur la nécessité d'apprendre une fonction de régularisation convexe. Utilisées comme fonctions d'activation dans les réseaux de neurones, elles présentent de nombreux avantages. Grâce à leur flexibilité, elles capturent efficacement les relations non linéaires complexes, améliorant ainsi l'apprentissage et la représentation des structures sous-jacentes des données.
+
+De plus, la continuité des splines et de leurs dérivées favorise une surface de perte plus lisse, simplifiant ainsi l’optimisation et accélérant la convergence des modèles. Elles offrent également un contrôle local sur la forme de la courbe, permettant d'ajuster précisément certaines zones sans impacter l’ensemble du modèle.
+
+Contrairement à des fonctions d'activation classiques telles que la sigmoïde ou la tangente hyperbolique, les splines évitent les problèmes de saturation et réduisent le risque d’atténuation des gradients (vanishing gradients). Leur utilisation améliore donc la stabilité et l'efficacité des réseaux de neurones, ce qui les rend particulièrement adaptées à des applications complexes en vision par ordinateur et en traitement du langage naturel.
+
+\subsection{Splines polynomiales}
+
+Une spline polynomiale est une fonction définie par morceaux sur la droite réelle, où chaque segment est un polynôme. Les splines de degré \( n \) sont particulièrement intéressantes car elles offrent un paramètre libre par segment, garantissant une flexibilité optimale pour l’approximation de fonctions complexes. Elles sont définies par des nœuds distincts, et les morceaux polynomiaux de degré \( n \) sont reliés de manière continue, assurant que la fonction globale possède des dérivées continues jusqu'à l'ordre \( (n - 1) \). Lorsque les nœuds sont espacés uniformément, on parle de splines cardinales, qui sont largement utilisées en traitement d’images \cite{unser1999splines}.  
+
+Dans les années 1950, Isaac Schoenberg a posé les bases des splines cardinales \cite{schoenberg1967spline} en démontrant que l’ensemble \( S_n \) des splines cardinales de degré \( n \) pouvait être généré à partir d’une unique fonction : la B-spline de degré \( n \). Dans cette partie, nous considérons la B-spline causale, notée \( \beta_{+}^{n} \), qui constitue l’élément fondamental le plus court parmi les splines non nulles de degré \( n \).  
+
+Une propriété remarquable des B-splines est qu'elles peuvent être construites de manière récursive via la relation suivante :
+\[
+\beta_{+}^{n+1} = \beta_{+}^{n} * \beta_{+}^{0},
+\]
+en partant de \( \beta_{+}^{0} \), qui est une fenêtre rectangulaire définie sur l’intervalle \([0, 1)\) :
+\[
+\beta_{+}^{0}(x) =
+\begin{cases}
+1, & 0 \leq x < 1, \\
+0, & \text{sinon}.
+\end{cases}
+\]
+L'opération de convolution par \( \beta_{+}^{0} \) peut être décomposée en deux étapes successives :  
+\begin{enumerate}
+\item Une intégration, qui transforme une spline de degré \( n \) en une spline de degré \( (n + 1) \).  
+\item Une différence finie, qui ramène la fonction à un support compact.
+\end{enumerate}
+
+Plus précisément, cette propriété s'écrit :
+\[
+(f * \beta_{+}^{0})(x) = \Delta\left\{ \int_{-\infty}^{x} f(t) dt \right\},
+\]
+ou \( \Delta\{f\} = f(\cdot) - f(\cdot - 1) \) représente l'opérateur de différence finie appliqué à \( f \).  
+
+Grâce à leurs excellentes propriétés de reproduction et à leur support minimal, les B-splines permettent des implémentations efficaces et optimisées, ce qui en fait un outil privilégié dans de nombreux domaines, notamment pour l’approximation numérique et le traitement d’images \cite{de1972calculating, unser1993b}. 
+
+\subsection{B-splines comme fonctions d'activation en apprentissage profond}
+
+Les splines polynomiales sont des outils fondamentaux en approximation fonctionnelle, particulièrement en traitement du signal et en imagerie \cite{unser1999splines}. Parmi elles, les B-splines occupent une place centrale en raison de leurs propriétés de régularisation et de leur capacité à générer une base optimale pour l'interpolation et l'approximation \cite{schoenberg1967spline}. Leur application récente en apprentissage profond consiste à exploiter ces propriétés pour définir des fonctions d'activation neuronales optimisables, en remplacement des activations classiques fixes comme ReLU ou sigmoïde \cite{bohra2020learning}.
+
+Une B-spline de degré $n$ est définie par convolution récursive d'une fenêtre caractéristique $\beta_{+}^{0}$ avec elle-même. Cette construction garantit une continuité des dérivées jusqu'à l'ordre $(n-1)$ et une flexibilité accrue dans l'adaptation aux données. L'utilisation des B-splines comme fonctions d'activation repose sur leur capacité à s'ajuster dynamiquement lors de l'entraînement, contrairement aux activations classiques qui sont fixes et ne peuvent pas s'adapter au problème d'apprentissage.
+
+Dans le contexte des réseaux neuronaux, une fonction d'activation B-spline est modélisée sous la forme d'une somme pondérée de B-splines de degré $n$ positionnées sur une grille uniforme, soit :
+\begin{equation}
+    \sigma(x) = \sum_{k} c_k \beta_n(x - kT),
+\end{equation}
+où $c_k$ sont des coefficients optimisés pendant l'entraînement et $T$ représente l'espacement des nœuds. Cette formulation permet d'approximer une large gamme de transformations non linéaires tout en assurant une régularisation implicite via la parcimonie des coefficients.
+
+L'adaptation des B-splines aux fonctions d'activation peut se faire selon différentes déclinaisons, dont les splines linéaires et splines quadratiques qui offrent un bon compromis entre expressivité et efficacité computationnelle.
+
+\subsubsection{Splines linéaires en tant que fonctions d'activation}
+
+Les splines linéaires ($n=1$) sont définies par des segments linéaires continus entre chaque paire de nœuds, ce qui permet une interpolation simple et efficace. Elles sont particulièrement adaptées aux architectures neuronales car elles conservent un coût de calcul faible tout en apportant une flexibilité supérieure aux activations classiques. Leur formulation repose sur une interpolation bilinéaire entre nœuds adjacents :
+\begin{equation}
+    \sigma(x) = c_k (1 - \alpha) + c_{k+1} \alpha, \quad \text{où } \alpha = \frac{x - x_k}{T}.
+\end{equation}
+L'entraînement optimise les coefficients $c_k$ afin d'ajuster dynamiquement la fonction d'activation à la distribution des données.
+
+\subsubsection{Splines quadratiques en tant que fonctions d'activation}
+
+Les splines quadratiques ($n=2$) offrent une approximation plus fluide en garantissant la continuité des premières dérivées. Leur construction repose sur trois coefficients d'interpolation par segment, permettant une meilleure expressivité sans complexité excessive. L'évaluation d'une spline quadratique repose sur une combinaison pondérée des valeurs adjacentes :
+\begin{equation}
+    \sigma(x) = c_k \beta_2(x - kT) + c_{k+1} \beta_2(x - (k+1)T) + c_{k+2} \beta_2(x - (k+2)T).
+\end{equation}
+L'optimisation conjointe des coefficients permet une flexibilité accrue dans l'ajustement des non-linéarités du réseau, facilitant ainsi l'apprentissage de représentations adaptées aux données.
+
+\subsubsection{Régularisation et contraintes sur les coefficients}
+
+L'utilisation de splines en tant que fonctions d'activation implique un mécanisme de régularisation afin de limiter la complexité du modèle et d'éviter un ajustement excessif. Une pénalité $L_1$ sur la seconde dérivée est souvent appliquée pour contrôler la variabilité des coefficients :
+\begin{equation}
+    TV(2)(\sigma) = \sum_k |\Delta^2 c_k| = \sum_k |c_k - 2c_{k+1} + c_{k+2}|.
+\end{equation}
+Cette régularisation favorise une approximation parcimonieuse et assure la stabilité du réseau en évitant des variations abruptes non justifiées.
+
+\subsubsection{Comparaison avec les fonctions d'activation classiques}
+
+Les fonctions d’activation B-spline, notamment sous leurs formes linéaire et quadratique, se distinguent des activations classiques par leur capacité d’adaptation et leur robustesse face aux gradients explosifs ou évanescents. Contrairement aux ReLU qui imposent une discontinuité en $x=0$, les splines assurent une transition fluide et contrôlée entre les différentes régions de l’espace des entrées. Elles permettent également d’éviter les saturations observées dans les sigmoïdes et tanh.
+
+Les expérimentations menées sur des tâches de classification d'images avec CIFAR-10 et CIFAR-100, ainsi que sur des problèmes de reconstruction de signaux ont montré que l’usage de splines comme fonction activation permet de réduire le nombre de couches nécessaires pour atteindre une performance donnée, notamment dans des architectures peu profondes \cite{bohra2020learning}. Cette capacité d’adaptation est particulièrement bénéfique pour les tâches nécessitant des transformations non linéaires complexes tout en maintenant une interprétabilité accrue des décisions du modèle.
+
+\section{Architecture de la fonction de régularisation}
+\subsection{Paramètres Généraux}
+
+Notre objectif est d'apprendre une fonction de régularisation \( R \) pour résoudre le problème variationnel suivant :  
+\[
+x^* \in \arg \min_{x \in \mathbb{R}^d} \left( \| Hx - y \|_2^2 + \lambda R(x) \right),
+\]
+qui doit être efficace pour une large variété de problèmes mal posés. À l'instar du cadre Plug-and-Play (PnP), nous considérons le débruitage :  
+\[
+x^* = \arg \min_{x \in \mathbb{R}^d} \left( \frac{1}{2} \| x - y \|_2^2 + \lambda R(x) \right),
+\]
+comme problème de base pour l'entraînement, où \( y \) représente l'image bruitée. Pour privilégier l'interprétabilité et la fiabilité, nous utilisons une fonction de régularisation simple sous la forme d’une somme de fonctions convexes en crête :  
+\[
+R(x) = \sum_{i} \psi_i(w_i^T x),
+\]
+où les fonctions de profil \( \psi_i : \mathbb{R} \rightarrow \mathbb{R} \) sont convexes, et \( w_i \in \mathbb{R}^d \) sont des poids apprenables et adoptons sa version convolutionnelle. Plus précisément, la régularité d'une image \( x \) est mesurée par :
+\[
+R: x \mapsto \sum_{i=1}^{N_C} \sum_{k \in \mathbb{Z}^2} \psi_i \left( (h_i * x)[k] \right),
+\]
+où \( h_i \) est la réponse impulsionnelle d'un filtre convolutionnel 2D, \( (h_i * x)[k] \) est la valeur du \( k \)-ème pixel de l'image filtrée \( h_i * x \), et \( N_C \) est le nombre de canaux. Considérant que \( R(x) \) est un cas particulier de \( R(x) = \sum_{i} \psi_i(w_i^T x) \), nous adopterons cette dernière notation générique pour simplifier les équations.
+
+Nous exprimons \( R \) en fonction d’un ensemble de paramètres apprenables \( \theta \) et notons \( R_\theta \) pour souligner cette dépendance. Par ailleurs, nous supposons que les profils convexes \( \psi_i \) possèdent des dérivées continues et Lipschitz-continues, soit \( \psi_i \in C^{1,1}(\mathbb{R}) \).
+
+\subsection{Réseau de neurones à pas de gradient}
+
+Sous ces hypothèses, l’image débruitée obtenue via :  
+\[
+x^* = \arg \min_{x \in \mathbb{R}^d} \left( \frac{1}{2} \| x - y \|_2^2 + \lambda R_\theta(x) \right),
+\]
+peut être interprétée comme le point fixe unique de l’opérateur \( T_{R_\theta,\lambda,\alpha} : \mathbb{R}^d \to \mathbb{R}^d \) défini par :  
+\[
+T_{R_\theta,\lambda,\alpha}(x) = x - \alpha \nabla \left( \frac{1}{2} \| x - y \|_2^2 + \lambda R_\theta(x) \right)
+\]
+\vspace{-0.6 cm}
+\[
+T_{R_\theta,\lambda,\alpha}(x) = x - \alpha \left( (x - y) + \lambda \nabla R_\theta(x) \right). \quad
+\]
+
+où \( \alpha > 0 \) est un pas d’apprentissage.
+
+Le point \( x^* \) étant un point fixe de l’opérateur \( T_{R_\theta,\lambda,\alpha} \) car il satisfait la condition d'optimalité du problème d'optimisation, c'est-à-dire qu'il ne change plus après une itération de mise à jour via \( T \).
+
+\hspace{-0.7 cm}On cherche à minimiser : 
+\[
+E(x) = \frac{1}{2} \| x - y \|_2^2 + \lambda R_\theta(x).
+\]
+Le minimum est atteint lorsque le gradient de \( E(x) \) est nul :
+\[
+\nabla E(x^*) = (x^* - y) + \lambda \nabla R_\theta(x^*) = 0.
+\]
+Si \( x^* \) est une solution optimale du problème, alors :
+\[
+(x^* - y) + \lambda \nabla R_\theta(x^*) = 0.
+\]
+En substituant dans \( T \), on obtient :
+\[
+T_{R_\theta,\lambda,\alpha}(x^*) = x^* - \alpha \cdot 0 = x^*.
+\]
+Donc, \( x^* \) est un point fixe de \( T_{R_\theta,\lambda,\alpha} \) car il satisfait à la fois la condition d'optimalité du problème d'optimisation et la définition même d’un point fixe : 
+\[
+T(x^*) = x^*.
+\]
+Les itérations de cet opérateur mettent en œuvre une descente de gradient avec un pas \( \alpha \), qui converge si :  
+\[
+\alpha \in \left(0, \frac{2}{1 + \lambda L_\theta}\right),
+\]
+où \( L_\theta = \text{Lip}(\nabla R_\theta) \) est la constante de Lipschitz du gradient \( \nabla R_\theta \). Nous imposons cette contrainte sur \( \alpha \) pour garantir la convergence.
+
+\hspace{-0.7 cm}Le gradient du régularisateur générique \( R(x) = \sum_{i} \psi_i(w_i^T x) \) est donné par :  
+\[
+\nabla R_\theta(x) = W^T \sigma(Wx),
+\]
+où \( W = [w_1 \cdots w_p]^T \in \mathbb{R}^{p \times d} \) et \( \sigma \) est une fonction d’activation point par point dont les composants \( (\sigma_i = \psi'_i)_{i=1}^p \) sont Lipschitz-continus et croissants. Dans notre implémentation, les fonctions \( \sigma_i \) sont partagées entre chaque canal de \( W \).
+
+Ainsi, l’opérateur de pas de gradient devient :  
+\[
+T_{R_\theta,\lambda,\alpha}(x) = (1 - \alpha)x + \alpha \left( y - \lambda W^T \sigma(Wx) \right).
+\]
+Cet opérateur correspond à un réseau de neurones convolutionnel à une couche cachée, incluant un biais et une connexion de contournement. Nous appelons ce modèle un réseau de neurones à pas de gradient. L’entraînement d’un tel réseau donne naissance à un CRR-NN (Convex Ridge Regularization Neural Network).
+
+\section{Caractérisation des bonnes fonctions de profil}
+
+Dans cette section, nous présentons des résultats théoriques qui justifient notre choix des profils \( \psi_i \) ou, de manière équivalente, de leurs dérivées \( \sigma_i = \psi'_i \).
+
+\subsection{Existence des minimisateurs et stabilité de la reconstruction}
+
+La convexité de \( R_\theta \) seule ne suffit pas à garantir que l'ensemble des solutions :  
+\[
+x^* \in \arg \min_{x \in \mathbb{R}^d} \left( \| Hx - y \|_2^2 + \lambda R(x) \right)
+\]  
+est non vide, surtout lorsque \( H \) est une matrice avancée et non inversible. Cependant, avec des fonctions de régularisation en crête convexe, cette limitation peut être surmontée sous une condition légère imposée aux fonctions \( \psi_i \), comme démontré dans la proposition ci-dessous.
+
+\begin{proposition}
+Soit \( H \in \mathbb{R}^{m \times d} \) et \( \psi_i : \mathbb{R} \to \mathbb{R} \), pour \( i = 1, \ldots, p \), des fonctions convexes. Si, pour tout \( i = 1, \ldots, p \), nous avons \( \arg \min_{t \in \mathbb{R}} \psi_i(t) \neq \emptyset \), alors :  
+\[
+\emptyset \neq \arg \min_{x \in \mathbb{R}^d} \left( \frac{1}{2} \| Hx - y \|_2^2 + \lambda \sum_{i=1}^p \psi_i(w_i^T x) \right).
+\]
+\end{proposition}
+\begin{proposition}
+
+Soit \( H \in \mathbb{R}^{m \times d} \) et \( \psi_i : \mathbb{R} \to \mathbb{R} \), pour \( i = 1, \ldots, p \), des fonctions convexes, continuellement différentiables, avec \( \arg \min_{t \in \mathbb{R}} \psi_i(t) \neq \emptyset \). Pour tout \( y_1, y_2 \in \mathbb{R}^m \), soit :  
+\[
+x_q \in \arg \min_{x \in \mathbb{R}^d} \left( \frac{1}{2} \| Hx - y_q \|_2^2 + \lambda \sum_{i=1}^p \psi_i(w_i^T x) \right),
+\]
+où \( q = 1, 2 \) sont les reconstructions correspondantes. Alors, la relation suivante est satisfaite :  
+\[
+\| Hx_1 - Hx_2 \|_2 \leq \| y_1 - y_2 \|_2.
+\]
+\end{proposition}
+\subsection{Expressivité des Fonctions de Profil}
+Le réseau de neurones à pas de gradient \( T_{R_\theta,\lambda,\alpha} \) est le composant clé de notre procédure d'entraînement. Ici, nous examinons son expressivité en fonction du choix des fonctions d'activation \( \sigma_i \) utilisées pour paramétrer \( \nabla R_\theta \).
+
+Soit \( C_{0,1}^+(\mathbb{R}) \), l'ensemble des fonctions scalaires Lipschitz-continues et croissantes sur \( \mathbb{R} \), et \( LS_m^+(\mathbb{R}) \), le sous-ensemble des splines linéaires croissantes avec au plus \( m \) nœuds. Nous définissons également :  
+\[
+E(\mathbb{R}^d) = \left\{ W^T \sigma(W \cdot) : W \in \mathbb{R}^{p \times d}, \sigma_i \in C_{0,1}^+(\mathbb{R}) \right\},
+\]
+et, pour tout \( \Omega \subset \mathbb{R}^d \),
+\[
+E(\Omega) = \left\{ f|_{\Omega} : f \in E(\mathbb{R}^d) \right\}.
+\]
+
+Pour mesurer les propriétés des fonctions sur un domaine \( \Omega \), nous utilisons les normes suivantes :
+\[
+\|f\|_{C(\Omega)} := \sup_{x \in \Omega} \|f(x)\| \quad \text{et} \quad \|f\|_{{C^1}(\Omega)} := \sup_{x \in \Omega} \|f(x)\| + \sup_{x \in \Omega} \|J_f(x)\|,
+\]
+où \( J_f(x) \) représente le jacobien de \( f \) en \( x \).
+
+Parmi les fonctions d'activation populaires, la ReLU (Rectified Linear Unit) est Lipschitz-continue et croissante. Cependant, son expressivité reste limitée, comme le démontre la Proposition suivante.
+
+\begin{proposition}
+Soit \( \Omega \subset \mathbb{R}^d \) compact avec un intérieur non vide. Alors, l'ensemble :
+\[
+\left\{ W^T \text{ReLU}(W \cdot - b) : W \in \mathbb{R}^{p \times d}, b \in \mathbb{R}^p \right\},
+\]
+n'est pas dense par rapport à$ \| \cdot \|_{C(\Omega)}$ dans $E(\Omega)$.
+\end{proposition}
+\begin{proposition}
+Soit \( \Omega \subset \mathbb{R}^d \) compact et \( m \geq 2 \). Alors, l'ensemble :
+\[
+\left\{ W^T \sigma(W \cdot) : W \in \mathbb{R}^{p \times d}, \sigma_i \in LS_m^+(\mathbb{R}) \right\},
+\]
+est dense par rapport à $\| \cdot \|_{C(\Omega)}$ dans $E(\Omega)$
+\end{proposition}
+
+\begin{corollary}
+Soit \( \Omega \subset \mathbb{R}^d \) convexe et compact avec un intérieur non vide. Les fonctions de régularisation de la forme :
+\[ R: x \mapsto \sum_{i} \psi_i(w_i^T x),\]
+avec des jacobiennes appartenant à l'ensemble :
+\[
+\left\{ W^T \sigma(W \cdot) : W \in \mathbb{R}^{p \times d}, \sigma_i \in LS_m^+(\mathbb{R}) \right\},
+\]
+sont denses dans :
+\[
+\left\{\sum_{i=1}^p \psi_i(w_i^T x) : \psi_i \in C^{1,1}(\mathbb{R}) \text{ convexe}, w_i \in \mathbb{R}^d \right\},
+\]
+par rapport à la norme $\|\cdot\|_{{C^1}(\Omega)}$.\\\\
+En revanche, cette densité ne tient pas si les jacobiennes sont limitées à l'ensemble :
+\[
+\left\{ W^T \text{ReLU}(W \cdot - b) : W \in \mathbb{R}^{p \times d}, b \in \mathbb{R}^p \right\}.
+\]
+\end{corollary}
+
+\section{Implémentation}
+
+\subsection{Entraînement d'un débruiteur à pas de gradient multiple}
+
+Soit \( \{x_m\}_{m=1}^M \) un ensemble d’images propres, et \( \{y_m\}_{m=1}^M = \{x_m + n_m\}_{m=1}^M \) leurs versions bruitées, où \( n_m \) représente le bruit ajouté. Pour apprendre les paramètres de \( R_\theta \), basés sur le problème :  
+\[
+x^* = \arg \min_{x \in \mathbb{R}^d} \left( \frac{1}{2} \| x - y \|_2^2 + \lambda R(x) \right),
+\]
+nous minimisons la perte suivante :  
+\[
+(\theta^*_t, \lambda^*_t) \in \arg \min_{\theta, \lambda} \sum_{m=1}^M L \left( T_t R_{\theta, \lambda, \alpha}(y^m), x^m \right),
+\]
+où \( T_t R_{\theta, \lambda, \alpha} \) désigne la composition \( t \)-fois du réseau de neurones à pas de gradient :  
+\[
+T_{R_{\theta, \lambda, \alpha}}(x) = (1 - \alpha)x + \alpha \left( y - \lambda W^T \sigma(Wx) \right).
+\]
+
+En théorie, pour \( t = \infty \), nous obtenons le point fixe \( T^\infty R_{\theta, \lambda, \alpha}(y^m) \). Cependant, résoudre ce problème d’optimisation bilatéral complet à l’aide de techniques comme la différentiation implicite \cite{pramanik2023memory,chen2014insights} est coûteux. Dans notre cadre contraint, il est suffisant d’approximer ce point fixe à l’aide d’un nombre fini \( t \) d’itérations. Cela définit un réseau de neurones débruitant en \( t \) étapes, \( T^t R_{\theta, \lambda, \alpha} \), entraîné pour approximer \( x^m \) à partir de \( y^m \). En pratique :  
+\[
+T^t R_{\theta, \lambda, \alpha}(y^m) \approx x^m, \quad \forall m = 1, \ldots, M.
+\]
+
+Cette approche peut être vue comme une minimisation partielle de :  
+\[
+x^* = \arg \min_{x \in \mathbb{R}^d} \left( \frac{1}{2} \| x - y \|_2^2 + \lambda R(x) \right),
+\]
+avec une estimation initiale \( y_m \), ou, de manière équivalente, comme un unfolding de l’algorithme de descente de gradient sur \( t \) itérations, avec des paramètres partagés entre les itérations \cite{aggarwal2018modl,pramanik2020deep}. Pour de faibles valeurs de \( t \), cela permet d’obtenir un débruiteur rapide à évaluer, bien que son interprétabilité soit limitée puisqu’il n’est pas nécessairement un opérateur proximal.
+
+Une fois le réseau de neurones à pas de gradient entraîné, le \( R_\theta \) correspondant peut être intégré dans :  
+\[
+x^* = \arg \min_{x \in \mathbb{R}^d} \left( \frac{1}{2} \| x - y \|_2^2 + \lambda R(x) \right),
+\]
+et utilisé pour résoudre complètement le problème d’optimisation, donnant lieu à un débruiteur proximal interprétable. En pratique, transformer un débruiteur en \( t \) étapes en un débruiteur proximal nécessite un ajustement de \( \lambda \) et l’ajout d’un paramètre d’échelle, comme décrit au chapitre 1.
+
+Notre méthode présente des similarités avec les réseaux variationnels (VN) proposés dans \cite{kobler2017variational}, mais aussi des différences fondamentales. Dans \cite{kobler2017variational}, les profils convexes apprenables sont paramétrés par des fonctions de base radiales, et seule la dernière étape de la descente de gradient est incluse dans le passage avant. Les auteurs y ont observé qu’une augmentation de \( t \) dégradait les performances de débruitage, ce qui n’est pas le cas dans notre architecture, où une augmentation de \( t \) améliore au contraire la qualité de reconstruction.
+
+\subsection{Implémentation des contraintes}
+
+L'apprentissage du débruiteur en \( t \) étapes est soumis aux contraintes suivantes :
+
+\begin{enumerate}
+    \item Les fonctions d'activation \( \sigma_i \) doivent être croissantes, ce qui impose une contrainte de convexité sur \( \psi_i \).
+    \item Les fonctions d'activation \( \sigma_i \) doivent s'annuler à une certaine valeur (contrainte d'existence).
+    \item Le pas de gradient dans :
+    \[
+    T_{R_{\theta, \lambda, \alpha}}(x) = (1 - \alpha)x + \alpha \left( y - \lambda W^T \sigma(Wx) \right),
+    \]
+    doit satisfaire \( \alpha \in \left(0, \frac{2}{1 + \lambda L_\theta}\right) \) afin d’assurer la convergence de la descente de gradient.
+\end{enumerate}
+
+Les méthodes utilisées pour imposer ces contraintes ont un impact significatif sur la performance du modèle final et doivent donc être soigneusement conçues.
+
+\subsubsection{Splines Monotones}
+
+Pour répondre simultanément aux contraintes (1) et (2), nous utilisons des splines linéaires apprenables \( \sigma_{c_i} : \mathbb{R} \to \mathbb{R} \), comme proposé dans \cite{bohra2021learning,bohra2020learning}. Ces splines sont définies sur \( (M + 1) \) nœuds uniformément espacés \( \nu_m = (m - M/2) \Delta \) pour \( m = 0, \ldots, M \), où \( \Delta \) est l’espacement des nœuds. Pour simplifier, nous supposons que \( M \) est pair. Les paramètres apprenables \( c_i = (c_{i m})_{m=0}^M \in \mathbb{R}^{M+1} \) définissent les valeurs de \( \sigma_{c_i} \) aux nœuds : \( \sigma_{c_i}(\nu_m) = c_{i m} \). Ces splines sont étendues par des valeurs constantes \( c_{i 0} \) pour \( (-\infty, \nu_0] \) et \( c_{i M} \) pour \( [\nu_M, +\infty) \).
+
+La régularité d’une image \( x \) est mesurée par :
+\[
+R_\theta(x) = \sum_{i} \psi_i(w_i^T x),
+\]
+\text{ où }  \(\psi_i\)= sont des fonctions convexes associées aux splines \(\sigma_{c_i}\).
+
+Soit \( D \in \mathbb{R}^{M \times (M+1)} \) la matrice des différences finies unidimensionnelles définie par \( (D c_i)_m = c_{i m+1} - c_{i m} \) pour \( m = 0, \ldots, M-1 \). Les splines sont croissantes si et seulement si :
+\[
+D c_i \geq 0.
+\]
+Pour garantir cette propriété, nous reparamétrons les splines linéaires en \( \sigma_{P^{\uparrow}}(c_i) \), où :
+\[
+P^{\uparrow}(c_i) = C D^{\dagger} \text{ReLU}(D c_i),
+\]
+avec \( D^{\dagger} \) l’inverse de Moore-Penrose de \( D \), et \( C \) une matrice centrant la sortie pour que \( c_{i M/2+1} = 0 \). Cette projection maintient les différences finies non négatives et met à zéro celles qui sont négatives.
+
+\subsubsection{Avantages et Implémentation}
+
+La reparamétrisation \( \sigma_{P^{\uparrow}}(c_i) \) permet d’utiliser des paramètres apprenables non contraints \( c_i \). Contrairement à une descente de gradient projetée traditionnelle \cite{kobler2017variational}, cette méthode intègre directement les contraintes via \( P^{\uparrow} \) dans le calcul des gradients :
+\[
+\begin{aligned}
+(\theta^*_t, \lambda^*_t) \in \arg \min_{\theta, \lambda} \sum_{m=1}^M L \left( T_t R_{\theta, \lambda, \alpha}(y^m), x^m \right).
+\end{aligned}
+\]
+
+Pour une efficacité accrue, \( P^{\uparrow} \) est implémenté avec la fonction \texttt{cumsum}, ce qui évite la construction explicite de \( D^{\dagger} \) et réduit considérablement le coût computationnel. Cette approche offre une alternative robuste aux méthodes traditionnelles, où une descente de gradient projetée peut entraîner des performances sous-optimales dans les problèmes non convexes.
+
+Les profils \( \psi_i \) associés satisfont à la convexité et à la condition \( \psi'_i(0) = \sigma_i(0) = 0 \), ce qui garantit l’existence de solutions au problème :
+\[
+x^* \in \arg \min_{x \in \mathbb{R}^d} \left( \| Hx - y \|_2^2 + R(x) \right).
+\]
+
+\subsubsection{Régularisation favorisant la parcimonie}
+
+L'utilisation de fonctions d'activation apprenables peut entraîner un surapprentissage, réduisant la capacité de généralisation à des opérateurs \( H \) arbitraires. Pour pallier cela, il est essentiel de favoriser des splines linéaires simples offrant de bonnes performances tout en utilisant un nombre minimal de nœuds. Cela est réalisé en pénalisant la variation totale d'ordre supérieur \( \| L P^{\uparrow}(c_i) \|_1 \) de chaque spline \( \sigma_{P^{\uparrow}}(c_i) \), où \( L \in \mathbb{R}^{(M-1) \times (M+1)} \) est la matrice des différences finies d'ordre secondaire.
+
+La perte d'entraînement finale s'exprime alors comme:
+\[
+\sum_{m=1}^{M} L \left( T_{R_{\theta, \lambda, \alpha}}(y^m), x^m \right) + \eta \sum_{i=1}^{p} \| L P^{\uparrow}(c_i) \|_1,
+\]
+où \( \eta > 0 \) ajuste la régularisation. Pour une perspective théorique approfondie sur la variation totale d'ordre supérieur, voir \cite{unser2019representer}, et pour des validations expérimentales, \cite{bohra2020learning}.
+
+\subsubsection{Étapes de gradient convergentes}
+
+La contrainte sur le pas \( \alpha \) garantit la convergence des itérations du réseau de neurones \( T_{R_{\theta, \lambda, \alpha}}^t \) vers le véritable minimiseur:
+\[
+x^* \in \arg \min_{x \in \mathbb{R}^d} \left( \| Hx - y \|_2^2 + R(x) \right),
+\]
+lorsque \( t \to \infty \). Elle apporte également de la stabilité à l'entraînement, même pour de petites valeurs de \( t \). Une estimation précise de la constante de Lipschitz \( \text{Lip}(\nabla R_\theta) \) est cruciale pour exploiter pleinement le modèle. La Proposition ci-dessous fournit une borne améliorée:
+
+\begin{proposition}
+Soit \( L_\theta \) la constante de Lipschitz de \( \nabla R_\theta(x) = W^T \sigma(Wx) \), avec \( W \in \mathbb{R}^{p \times d} \) et \( \sigma_i \in C^{0,1}_{\uparrow}(\mathbb{R}) \). En posant \( \Sigma_\infty = \text{diag}(\|\sigma'_1\|_\infty, \ldots, \|\sigma'_p\|_\infty) \), on obtient:
+\[
+L_\theta \leq \|W^T \Sigma_\infty W\|,
+\]
+ce qui est plus serré que la borne naïve:
+\[
+L_\theta \leq L_\sigma \|W\|^2.
+\]
+\end{proposition}
+
+\subsubsection{Des gradients aux potentiels}
+
+Pour récupérer le régularisateur \( R \) à partir de son gradient \( \nabla R \), on détermine les profils \( \psi_i \), tels que \( \psi'_i = \sigma_i P_{\uparrow}(c_i) \). Chaque \( \psi_i \) est un spline quadratique par morceaux exprimé comme:
+\[
+\psi_i(x) = \sum_{k \in \mathbb{Z}} d_{i,k} \beta_2^+ \left( x - k \Delta \right),
+\]
+où \( \beta_2^+ \) est le B-spline causale de degré 2. Les coefficients \( (d_{i,k})_{k \in \mathbb{Z}} \) sont définis par:
+\[
+d_{i,k} - d_{i,k-1} = (P_{\uparrow}(c_i))_k,
+\]
+avec une constante additive arbitraire. Cette constante n’affecte pas \( \nabla R \). Grâce au support fini de \( \beta_2^+ \), \( \psi_i \) et \( R \) peuvent être évalués efficacement; voir \cite{unser1999splines} pour plus de détails.
+
+\subsection{Renforcement de l'universalité du régularisateur}
+
+Le régularisateur \( R_\theta \) appris dépend de la tâche d'entraînement (débruitage) et du niveau de bruit. Pour résoudre un problème inverse générique, nous proposons d'incorporer un paramètre d'échelle ajustable \( \mu \in \mathbb{R}^+ \), en plus de la force de régularisation \( \lambda \). Le problème à résoudre devient:
+\[
+\arg \min_{x \in \mathbb{R}^d} \left( \frac{1}{2} \|Hx - y\|_2^2 + \frac{\lambda}{\mu} R_\theta(\mu x) \right).
+\]
+
+Bien que le paramètre d'échelle soit sans effet pour les régularisateurs homogènes tels que Tikhonov et TV, il est connu pour améliorer les performances dans le cadre PnP lorsqu'il est appliqué à l'entrée du débruiteur \cite{xu2020boosting}. 
+
+Lors de l'entraînement des débruiteurs en \( t \) étapes, nous apprenons également le paramètre d'échelle \( \mu \). Ainsi, le pas de gradient \( T_{R_{\theta, \lambda, \alpha}}(x) \), défini comme:
+\[
+T_{R_{\theta, \lambda, \alpha}}(x) = x - \alpha \left( (x - y) + \lambda \nabla R_\theta(x) \right),
+\]
+devient:
+\[
+T_{R_{\theta, \lambda, \mu, \alpha}}(x) = x - \alpha \left( (x - y) + \lambda \nabla R_\theta(\mu x) \right),
+\]
+avec la contrainte \( \alpha < \frac{2}{1 + \lambda \mu \text{Lip}(\nabla R_\theta)} \). Cette adaptation permet de mieux exploiter le régularisateur dans des scénarios variés, améliorant ainsi l'universalité et la robustesse du modèle.
+
+\section{Comparaison TV et DRUNet vs CRRNN : Expérience Numérique} 
+\subsection{Débruitage d'images}
+\subsubsection{Débruitage d'images avec un niveau de bruit faible}
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=1.1 \linewidth, totalheight=0.47 \textheight, angle=0, scale= 0.85, minipage= 4.2\linewidth, margin= 0}
+    \includegraphics[width=1\textwidth]{../results3/Imgs_denoised_sig15_comparison.png}
+\end{adjustbox}
+    \caption{Débruitage d'images avec un niveau de bruit  $\sigma = 0.06 \simeq \frac{15}{255}$}
+    \label{fig:12}
+\end{figure}
+
+La \hyperref[fig:12]{Figure 2.1} illustre la performance comparative des méthodes CRRNN, DRUNet et TV pour le débruitage d’images faiblement bruitées ($\sigma = 0.06$).
+
+Les PSNR des images bruitées avoisinent 24.5 dB. Après débruitage, CRRNN atteint des valeurs comprises entre 29.77 dB et 30.40 dB, se situant entre TV (environ 29 dB) et DRUNet (34-35 dB). Cela indique que CRRNN surpasse légèrement TV, mais reste moins en retrait par rapport à DRUNet.
+
+D’un point de vue qualitatif, CRRNN atténue efficacement le bruit tout en préservant certains détails fins mieux que TV. Toutefois, il montre encore une légère perte de texture et un adoucissement des structures complexes. DRUNet, quant à lui, parvient à une reconstruction plus fidèle, conservant mieux les contours et la texture des images.
+
+\subsubsection{Évolution comparative du PSNR}
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=1.1\linewidth, totalheight=0.47 \textheight, angle=0, scale= 0.85, minipage= 4.2\linewidth, margin= 0}
+    \includegraphics[width=1\textwidth]{../results3/Imgs_denoised_sig15_psnr_plot.png}
+\end{adjustbox}
+   \caption{Evolution comparative du PSNR pour un niveau de bruit  $\sigma = 0.06 \simeq \frac{15}{255}$}
+    \label{fig:13}
+\end{figure}
+
+La figure 2.2 montre une augmentation rapide du PSNR au début des itérations pour toutes les méthodes, indiquant une amélioration rapide de la qualité des images. Après environ 10 à 15 itérations, les courbes se stabilisent, ce qui suggère une convergence vers la performance maximale de chaque méthode.
+
+Les résultats montrent que DRUNet atteint le PSNR le plus élevé, et se stabilise rapidement, indiquant une supériorité en termes de réduction de bruit. CRRNN suit avec un PSNR légèrement inférieur, mais reste performant et stable. En revanche, TV (Total Variation) affiche un PSNR plus bas, autour de 30 dB, ce qui pourrait être dû à un effet de sur-lissage.
+
+\subsubsection{Débruitage d'images avec un niveau de bruit moyen}
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=1.1 \linewidth, totalheight=0.47 \textheight, angle=0, scale= 0.85, minipage= 4.2\linewidth, margin= 0}
+    \includegraphics[width=1\textwidth]{../results3/Imgs_denoised_sig25_comparison.png}
+\end{adjustbox}
+    \caption{Débruitage d'image avec un niveau de bruit  $\sigma = 0.1 \simeq \frac{25}{255}$}
+    \label{fig:14}
+\end{figure}
+
+La \hyperref[fig:14]{Figure 2.3} met en évidence la comparaison entre CRRNN, DRUNet et TV pour le débruitage d’images contenant un bruit modéré (\(\sigma = 0.1\)). 
+
+Bien que CRRNN améliore significativement le PSNR par rapport aux images bruitées, il reste systématiquement en retrait face à DRUNet. Avec des valeurs oscillant entre 25.9 dB et 27.1 dB, il surpasse légèrement TV, qui atteint environ 26 dB, mais ne parvient pas à égaler la restauration plus détaillée de DRUNet, qui culmine autour de 32.8 dB.
+
+Sur le plan visuel, CRRNN parvient à atténuer le bruit tout en conservant une partie des structures originales, mais au prix d’une perte de netteté plus marquée que DRUNet. Les textures apparaissent parfois légèrement adoucies, et certaines transitions de contours manquent de précision. Comparé à TV, CRRNN montre une meilleure conservation des détails, bien que quelques artefacts subsistent dans les zones complexes.
+
+\subsubsection{Étude comparative des PSNR}
+
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=0.985\linewidth, totalheight=0.47 \textheight, angle=0, scale=0.9, minipage=4.2\linewidth, margin=0}
+    \includegraphics[width=1\textwidth]{../results3/Imgs_denoised_sig25_psnr_plot.png}
+\end{adjustbox}
+    \caption{Évolution comparative du PSNR pour un niveau de bruit  $\sigma = 0.1 \simeq \frac{25}{255}$}
+    \label{fig:15}
+\end{figure}
+
+Parmi les approches testées dans la figure 2.4, DRUNet domine avec une valeur de PSNR plus élevée et une convergence rapide, témoignant d'une meilleure capacité à restaurer les images bruitées. CRRNN offre également des résultats satisfaisants, bien que en retrait par rapport à DRUNet.
+
+Les tendances restent globalement similaires entre les différentes images, bien que certaines trajectoires présentent de légères variations en termes de vitesse de convergence et de niveau de stabilisation.
+
+CRRNN constitue donc un compromis intéressant entre TV et DRUNet, offrant une amélioration notable de la qualité par rapport à TV, bien qu’il ne parvienne pas au même niveau de détail que DRUNet.
+
+\subsection{Défloutage d'images}
+\subsubsection{Défloutage d'images avec un faible niveau de flou }
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=1.1 \linewidth, totalheight=0.47 \textheight, angle=0, scale= 0.85, minipage= 4.2\linewidth, margin= 0}
+    \includegraphics[width=1\textwidth]{../results3/Imgs_deblurred_sig_1_comparison.png}
+\end{adjustbox}
+    \caption{Défloutage avec un faible niveau de flou (\(\sigma = 1\))}
+    \label{fig:16}
+\end{figure}
+
+La \hyperref[fig:16]{Figure 2.5} évalue la capacité du modèle CRRNN à restaurer des images soumises à un faible flou (\(\sigma = 1\)), en le comparant à TV et DRUNet.
+
+Les PSNR initiaux des images floues varient entre 23.87 dB et 27.80 dB, traduisant une perte notable de netteté. Après défloutage, CRRNN atteint des valeurs comprises entre 33.11 dB et 35.06 dB, se positionnant au même niveau que DRUNet, dont le PSNR oscille entre 33.03 dB et 35.08 dB. Contrairement aux cas précédents de débruitage, CRRNN ne montre plus un écart significatif avec DRUNet, suggérant une capacité équivalente à restaurer les structures dégradées par le flou. En revanche, TV affiche des résultats plus contrastés avec des valeurs allant de 35.77 dB à 37.15 dB, souvent supérieures aux deux autres méthodes.
+
+D’un point de vue qualitatif, CRRNN parvient à restaurer les contours avec une netteté satisfaisante et réduit efficacement l’effet de flou. Cependant, certaines zones complexes conservent encore un léger effet d’adoucissement. DRUNet présente des résultats très similaires, avec une qualité de restauration quasi identique. Par contre la méthode TV, reste meilleure ici également. 
+
+Ces résultats suggèrent que CRRNN est une alternative valable à DRUNet dans le cas d’un faible flou, bien que TV affiche une meilleure performance quantitative.
+
+\subsubsection{Étude comparative des PSNR}
+
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=0.985\linewidth, totalheight=0.47 \textheight, angle=0, scale=0.9, minipage=4.2\linewidth, margin=0}
+    \includegraphics[width=1\textwidth]{../results3/Imgs_deblurred_sig_1_psnr_plot.png}
+\end{adjustbox}
+    \caption{Évolution comparative du PSNR pour différentes méthodes de défloutage (\(\sigma = 1\))}
+    \label{fig:17}
+\end{figure}
+
+La \hyperref[fig:17]{Figure 2.6} illustre l’évolution du PSNR pour CRRNN en comparaison avec DRUNet et TV dans le cadre d’un faible niveau de flou (\(\sigma = 1\)).
+
+Dans les premières itérations, les trois méthodes montrent une augmentation rapide du PSNR, reflétant une amélioration significative de la qualité d’image. CRRNN et DRUNet suivent une trajectoire similaire, avec une progression rapide au début avant d’atteindre un plateau entre 30 et 35 dB.
+
+Comparé à TV, CRRNN présente une performance intermédiaire. TV tend à converger plus rapidement et atteint un PSNR final comparable, voire légèrement supérieur, sur la plupart des images.
+
+CRRNN maintient donc une bonne balance entre réduction du flou et préservation des structures d’image. Il se rapproche de DRUNet en termes de performance, bien qu’il reste légèrement en retrait par rapport à TV. Ainsi, CRRNN s’avère être une solution compétitive pour la restauration d’images légèrement floues.
+
+\subsubsection{Défloutage d'images avec un fort niveau de flou}
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=1.1 \linewidth, totalheight=0.47 \textheight, angle=0, scale= 0.85, minipage= 4.2\linewidth, margin= 0}
+    \includegraphics[width=1\textwidth]{../results3/Imgs_deblurred_sig_3_comparison.png}
+\end{adjustbox}
+    \caption{Défloutage d'images avec un fort niveau de flou  (\(\sigma = 3\))}
+    \label{fig:18}
+\end{figure}
+
+La \hyperref[fig:18]{Figure 2.7} examine la performance de CRRNN face à TV et DRUNet pour la restauration d’images fortement dégradées par un flou important (\(\sigma = 3\)).
+
+Les PSNR des images floues initiales varient entre 16.14 dB et 21.43 dB, illustrant une perte sévère des détails et une forte dégradation de la netteté. Après traitement, CRRNN atteint des valeurs comprises entre 20.14 dB et 24.67 dB, se plaçant légèrement devant DRUNet dans certains cas, notamment sur l’image des feuilles. Néanmoins, DRUNet maintient des performances similaires avec des PSNR allant de 19.82 dB à 23.87 dB. TV obtient les meilleurs scores, atteignant jusqu’à 25.27 dB.
+
+D’un point de vue visuel, CRRNN parvient à restaurer une partie des contours et à atténuer l’effet de flou, bien qu’une certaine douceur persiste dans les régions les plus altérées. Comparé à DRUNet, les différences restent minimes, avec des performances globalement équivalentes. La méthode TV quant elle à reste également visuellement plus cohérente.
+
+Ces observations suggèrent que CRRNN et DRUNet offrent des résultats comparables dans des conditions de flou sévère, tandis que TV optimise davantage le PSNR mais au prix d’une altération potentielle de la structure des images.
+
+\subsubsection{Étude comparative des PSNR}
+
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=0.985\linewidth, totalheight=0.47 \textheight, angle=0, scale=0.9, minipage=4.2\linewidth, margin=0}
+\includegraphics[width=1\textwidth]{../results3/Imgs_deblurred_sig_3_psnr_plot.png}
+\end{adjustbox}
+    \caption{Évolution comparative du PSNR pour différentes méthodes de débruitage (\(\sigma = 3\))}
+    \label{fig:19}
+\end{figure}
+
+La \hyperref[fig:19]{Figure 2.8} illustre l’évolution du PSNR pour CRRNN en comparaison avec DRUNet et TV lors du processus de restauration d’images. 
+
+Dans les premières itérations, toutes les méthodes affichent une augmentation rapide du PSNR, traduisant une amélioration substantielle de la qualité d’image. Toutefois, CRRNN présente une croissance plus lente par rapport à DRUNet, qui atteint plus rapidement un plateau de performance. CRRNN se stabilise à des valeurs de PSNR comprises entre 22 dB et 26 dB, tandis que DRUNet atteint des niveaux légèrement inférieures. Comparé à TV, CRRNN offre des résultats intermédiaires. TV tend à converger plus rapidement et atteint des PSNR plus élevées.
+
+\chapter*{Discussions}
+\section*{Choix des fonctions splines comme  fonctions   d'activation } 
+L'adoption des splines comme fonctions d'activation dans les réseaux de neurones présente plusieurs avantages par rapport aux fonctions classiques (ReLU, sigmoïde, tangente hyperbolique). Leur flexibilité permet de capturer des relations non linéaires complexes, tandis que leur continuité et la régularité de leurs dérivées favorisent une surface de perte plus nette, simplifiant l'optimisation et accélérant la convergence. De plus, les splines évitent les problèmes de saturation et réduisent le risque d'atténuation des gradients (\textit{vanishing gradients}), améliorant ainsi la stabilité et l'efficacité des modèles.
+
+\section*{Utilité du paramètre d’échelle $\mu$}
+Le paramètre d'échelle $\mu$ joue un rôle crucial dans l'adaptabilité et l'universalité de la fonction de  régularisation $R_\theta$. En introduisant $\mu$ dans la formulation du problème d'optimisation, la fonction de  régularisation devient plus flexible et capable de s'adapter à des tâches variées, indépendamment du niveau de bruit ou de la nature de la dégradation.
+
+De plus, lors de l'entraînement, l'apprentissage conjoint de $\mu$ et de la fonction de  régularisation permet de mieux contrôler le pas de gradient, garantissant une convergence stable et efficace. Cette adaptation renforce la robustesse du modèle et étend son applicabilité à des problèmes inverses génériques, tout en préservant les propriétés de régularisation nécessaires.
+
+\section*{Gain computationnelle} 
+Il est important de noter que la complexité du réseau DRUNet est nettement plus élevée que celle du CRRNN. En effet, DRUNet, bien qu'il offre des performances supérieures en tant que débruiteur, comme le montre nos résultats, repose sur une architecture plus profonde et plus complexe, nécessitant des calculs plus intensifs. En revanche, le CRRNN se distingue par sa simplicité et son efficacité, malgré une performance légèrement inférieure en termes de débruitage. Le CRRNN utilise une seule couche cachée et des splines linéaires comme fonctions d'activation, ce qui en fait un modèle beaucoup plus léger et rapide à exécuter.
+
+\section*{Limites de l'étude}
+L'utilisation de modèles pré-entraînés pour la reconstruction d'images présente plusieurs limites qu'il est important de considérer. En effet, ces modèles reposent sur des poids déterminés lors de leur phase d'apprentissage initiale, qui peuvent ne pas être optimaux pour des applications ou des types de problèmes spécifiques. Par exemple, dans le cas du problème de défloutage, on observe que l'utilisation des poids des modèles DRUNet et CRRNN conduit à des résultats moins performants que ceux obtenus avec la méthode TV (Total Variation). Cela ne signifie pas que la TV est forcement meilleur à ces modèles, mais cela peut être dû au fait que les modèles pré-entraînés n'ont pas été réentraîner avec des paramètres adaptés à cette tâche spécifique.
+
+De plus, les performances des modèles pré-entraînés atteignent généralement leur maximum dans des conditions similaires à celles rencontrées lors de leur entraînement. Lorsqu'ils sont appliqués à des images ou à des types de bruit différents, leur efficacité peut diminuer de manière significative. Cette limitation souligne l'importance d'adapter ou de réentraîner ces modèles pour les rendre plus robustes et polyvalents dans des contextes variés.
+
+\chapter*{Conclusion}
+
+Les problèmes inverses en traitement d’images et de signaux sont essentiels dans de nombreuses applications scientifiques et industrielles. Leur résolution repose sur la connaissance du modèle direct et l’exploitation d’a priori pertinents pour estimer une solution optimale.
+
+Dans ce contexte, les méthodes "Plug-and-Play" offrent des alternatives puissantes par rapport aux méthodes classiques en termes de résolution, bien qu'elles soient moins fiables et interprétables. L'utilisation de fonctions de régularisation paramétrées par des réseaux de neurones permet d'intégrer des propriétés spécifiques, telles que la convexité, ce qui améliore la qualité des reconstructions tout en augmentant la fiabilité et l'interprétabilité.
+
+L'analyse comparative des méthodes TV, DRUNet et CRRNN révèle des performances variées selon le type de dégradation. La méthode TV se montre particulièrement efficace pour traiter les flous sévères grâce à sa régularisation ciblée, bien qu'elle souffre d'une convergence lente et d'une perte de précision sur les détails fins. DURNet, quant à elle, se démarque par sa rapidité de convergence et son efficacité dans la réduction du bruit, atteignant des PSNR plus élevés pour divers niveaux de bruit. Cependant, elle présente des limites face à des dégradations complexes comme le flou. Enfin, CRRNN produit des résultats similaires à ceux de DRUNet, bien que inférieurs en termes de PSNR. Son principal atout est de surpasser la méthode TV dans le débruitage en termes de PSNR, tout en conservant sa fiabilité et son explicabilité.
+
+En somme, cette recherche souligne l'importance d'une approche équilibrée, combinant performance, fiabilité et interprétabilité . À l'avenir, il serait pertinent d'explorer l'optimisation des hyperparamètres et d'adapter les modèles à des scénarios réels, tout en développant des solutions innovantes qui intègrent intelligemment les avancées en apprentissage profond et en traitement d'images. 
+
+\newpage
+
+\vspace*{\fill}
+\begin{center}
+    {\fontsize{50}{60}\selectfont \textbf{Annexe}}
+\end{center}
+\vspace*{\fill}
+
+\newpage
+\section*{Annexe 1 : Débruitage avec initialisation à zéros}
+\subsection*{Annexe 1.1 : Débruitages d'images faiblement bruitées}
+
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=1\linewidth, totalheight=0.48 \textheight, angle=0, scale= 0.72, minipage= 4.2\linewidth, margin= 0}
+\includegraphics[width=1\textwidth]{../results2/Imgs_denoised_sig15_comparison.png}
+\end{adjustbox}
+
+\caption{Débruitage d'images avec un niveau de bruit $\sigma = 0.06 \simeq \frac{15}{255}$} 
+    \label{fig:20}
+\end{figure}
+
+\subsection*{Annexe 1.2 : Évolution comparative du PSNR (Images faiblement bruitées)}
+
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=1\linewidth, totalheight=0.48 \textheight, angle=0, scale= 0.72, minipage= 4.2\linewidth, margin= 0}
+\includegraphics[width=1\textwidth]{../results2/Imgs_denoised_sig15_psnr_plot.png}
+\end{adjustbox}
+\caption{Évolution comparative du PSNR (TV et DRUNet pour $\sigma = 0.06$)} 
+    \label{fig:21}
+\end{figure} 
+
+\subsection*{Annexe 1.3 : Débruitage d'images fortement bruitées}
+
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=1\linewidth, totalheight=0.5 \textheight, angle=0, scale= 0.72, minipage= 4.2\linewidth, margin= 0}
+\includegraphics[width=1\textwidth]{../results2/Imgs_denoised_sig50_comparison.png}
+\end{adjustbox}
+\caption{Débruitage d'images avec un niveau de bruit $\sigma = 0.2 \simeq \frac{50}{255}$} 
+    \label{fig:22}
+\end{figure}  
+
+\subsection*{Annexe 1.4 : Évolution comparative du PSNR (Images fortement bruitées)}
+
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=1\linewidth, totalheight=0.5 \textheight, angle=0, scale= 0.72, minipage= 4.2\linewidth, margin= 0}
+\includegraphics[width=1\textwidth]{../results2/Imgs_denoised_sig50_psnr_plot.png}
+\end{adjustbox}
+\caption{Évolution comparative du PSNR (TV et DRUNet pour $\sigma = 0.2$)} 
+    \label{fig:23}
+\end{figure}
+
+\section*{Annexe 2 : Défloutage avec initialisation à zéros}
+\subsection*{Annexe 2.1 : Défloutage d'images faiblement floutées}
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=1\linewidth, totalheight=0.5 \textheight, angle=0, scale= 0.72, minipage= 4.2\linewidth, margin= 0}
+    \includegraphics[width=1\textwidth]{../results2/Imgs_deblurred_sig_1_comparison.png}
+\end{adjustbox}
+    \caption{ Défloutage d'images avec un niveau de flou $\sigma = 1$}
+    \label{fig:24}
+\end{figure} 
+
+\subsection*{Annexe 2.2 : Évolution comparative du PSNR (Images faiblement floutées)}
+
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=1\linewidth, totalheight=0.5 \textheight, angle=0, scale= 0.72, minipage= 4.2\linewidth, margin= 0}
+\includegraphics[width=1\textwidth]{../results2/Imgs_deblurred_sig_1_psnr_plot.png}
+\end{adjustbox}
+\caption{Évolution comparative du PSNR (TV et DRUNet pour $\sigma = 1$)}
+    \label{fig:25}
+\end{figure}
+
+\subsection*{Annexe 2.3 : Défloutage d'images fortement floutées}
+
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=1\linewidth, totalheight=0.5 \textheight, angle=0, scale= 0.72, minipage= 4.2\linewidth, margin= 0}
+    \includegraphics[width=1\textwidth]{../results2/Imgs_deblurred_sig_3_comparison.png}
+\end{adjustbox}
+    \caption{Défloutage d'images avec un niveau de flou $\sigma = 3$}
+    \label{fig:26}
+\end{figure} 
+
+\subsection*{Annexe 2.4 : Évolution comparative du PSNR (Images fortement floutées)}
+
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=1\linewidth, totalheight=0.5 \textheight, angle=0, scale= 0.72, minipage= 4.2\linewidth, margin= 0}
+\includegraphics[width=1\textwidth]{../results2/Imgs_deblurred_sig_3_psnr_plot.png}
+\end{adjustbox}
+\caption{Évolution comparative du PSNR (TV et DRUNet pour $\sigma = 3$)}
+    \label{fig:27}
+\end{figure}
+
+\section*{Annexe 3 : Inpaiting avec initialisation à zéros}
+\subsection*{Annexe 3.1 : Inpainting d'images faiblement bruitées}
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=1\linewidth, totalheight=0.48 \textheight, angle=0, scale= 0.72, minipage= 4.2\linewidth, margin= 0}
+    \includegraphics[width=1\textwidth]{../results2/Imgs_inpaint_simple_comparison.png}
+\end{adjustbox}
+    \caption{Inpainting d'images avec un niveau de bruit $\sigma = 0.06 \simeq \frac{15}{255}$}
+    \label{fig:28}
+\end{figure} 
+
+\subsection*{Annexe 3.2 : Évolution comparative du PSNR (Images masquées et bruitées)}
+
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=1\linewidth, totalheight=0.5 \textheight, angle=0, scale= 0.72, minipage= 4.2\linewidth, margin= 0}
+\includegraphics[width=1\textwidth]{../results2/Imgs_inpaint_simple_psnr_plot.png}
+\end{adjustbox}
+\caption{Évolution comparative du PSNR (TV et DRUNet pour $\sigma = 0.06$)} 
+    \label{fig:29}
+\end{figure}
+
+\subsection*{Annexe 3.3 : Inpainting d'images moyennement bruitées}
+
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=1\linewidth, totalheight=0.5 \textheight, angle=0, scale= 0.72, minipage= 4.2\linewidth, margin= 0}
+    \includegraphics[width=1\textwidth]{../results2/Imgs_inpaint_medium_comparison.png}
+\end{adjustbox}
+    \caption{Inpainting d'images avec un niveau de bruit $\sigma = 0.1 \simeq \frac{25}{255}$}
+    \label{fig:30}
+\end{figure} 
+
+\subsection*{Annexe 3.4 : Évolution comparative du PSNR (Images masquées et bruitées)}
+
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{width=1\linewidth, totalheight=0.5 \textheight, angle=0, scale= 0.72, minipage= 4.2\linewidth, margin= 0}
+\includegraphics[width=1\textwidth]{../results2/Imgs_inpaint_medium_psnr_plot.png}
+\end{adjustbox}
+\caption{Évolution comparative du PSNR (TV et DRUNet pour $\sigma = 0.1$)} 
+    \label{fig:31}
+\end{figure}
+Les fonctions de profil \( \psi_i \) doivent étre expressive dans le sens ou les fonctions de régularisation de la forme :
+\[ R: x \mapsto \sum_{i} \psi_i(w_i^T x),\]
+avec des jacobiennes appartenant à l'ensemble :
+\[
+\left\{ W^T \sigma(W \cdot) : W \in \mathbb{R}^{p \times d}, \sigma_i \in LS_m^+(\mathbb{R}) \right\},
+\]
+sont denses dans :
+\[
+\left\{\sum_{i=1}^p \psi_i(w_i^T x) : \psi_i \in C^{1,1}(\mathbb{R}) \text{ convexe}, w_i \in \mathbb{R}^d \right\}
+\]
+
+
+\bibliographystyle{plain}
+\bibliography{ref.bib}
+
+ 
+\end{document}
